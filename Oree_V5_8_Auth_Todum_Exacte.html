@@ -1,0 +1,697 @@
+<!doctype html><html lang='fr'><head><meta charset='utf-8'><meta name='viewport' content='width=device-width,initial-scale=1'><title>Orée V5.8</title>
+<style>
+:root{--ink:#19362f;--muted:#718078;--bg:#f7f5ef;--panel:#fffdf8;--line:#e6e4dc;--green:#e7f0e4;--green2:#cddfc8;--pink:#f7e7e5;--blue:#e5eef3;--violet:#eee8f6;--sand:#f2eadc;--accent:#285d4a;--shadow:0 8px 26px rgba(39,67,55,.08)}*{box-sizing:border-box}body{margin:0;font-family:Inter,ui-sans-serif,system-ui,-apple-system,Segoe UI,sans-serif;background:var(--bg);color:var(--ink)}button,select{font:inherit;color:inherit}button{cursor:pointer}.app{min-height:100vh;display:grid;grid-template-columns:230px 1fr}.side{background:#f0f1ea;border-right:1px solid var(--line);padding:28px 20px;position:sticky;top:0;height:100vh}.brand{font-family:Georgia,serif;font-size:28px;font-weight:700}.tagline{font-family:Georgia,serif;line-height:1.45;margin:4px 0 28px;color:#465a51}.nav button{display:flex;width:100%;border:0;background:transparent;padding:11px 12px;border-radius:12px;margin:4px 0;text-align:left;gap:10px}.nav button.active{background:#dfe9dd;font-weight:700}.sources{margin-top:28px;padding-top:18px;border-top:1px solid #d9ddd4}.eyebrow{text-transform:uppercase;font-size:11px;letter-spacing:.12em;color:#68766f;font-weight:800}.source{font-size:13px;padding:7px 0;display:flex;gap:8px}.quote{position:absolute;bottom:28px;left:20px;right:20px;padding:18px;border-radius:16px;background:rgba(255,255,255,.55);font-family:Georgia,serif;font-style:italic;line-height:1.5}.main{padding:30px 34px 50px;max-width:1500px;width:100%;margin:auto}.top{display:flex;align-items:flex-start;justify-content:space-between;gap:20px}.top h1{font-family:Georgia,serif;margin:0;font-size:34px}.top p{margin:5px 0;color:#506159}.period{display:flex;gap:8px}.period select,.period button,.filters select{border:1px solid var(--line);background:var(--panel);border-radius:11px;padding:10px 13px}.metrics{display:grid;grid-template-columns:repeat(4,1fr);gap:14px;margin:24px 0 16px}.metric{padding:18px;border-radius:17px;min-height:120px;position:relative;overflow:hidden}.metric:nth-child(1){background:var(--pink)}.metric:nth-child(2){background:var(--green)}.metric:nth-child(3){background:var(--blue)}.metric:nth-child(4){background:var(--violet)}.metric .label{font-weight:750;font-size:14px}.metric strong{display:block;font-family:Georgia,serif;font-size:39px;margin-top:12px}.metric small{color:#68766f}.summary{background:linear-gradient(110deg,#edf3e8,#f5f1e5);border-radius:20px;padding:22px 28px;display:grid;grid-template-columns:1fr 260px;gap:25px;align-items:center}.summary h2{font-family:Georgia,serif;margin:0 0 7px;font-size:21px}.summary p{margin:0;line-height:1.55;color:#4e5f56}.summary blockquote{font-family:Georgia,serif;font-style:italic;text-align:center;margin:0;line-height:1.5}.section-head{display:flex;justify-content:space-between;align-items:end;margin:28px 0 12px}.section-head h2{font-family:Georgia,serif;margin:0;font-size:25px}.section-head p{margin:3px 0 0;color:var(--muted);font-size:13px}.projects{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:12px}.card{border:1px solid var(--line);background:var(--panel);border-radius:15px;padding:12px;box-shadow:0 2px 8px rgba(30,50,40,.03);transition:.16s;min-height:175px}.card:hover{transform:translateY(-2px);box-shadow:var(--shadow);border-color:#cbd8ce}.card-top{display:flex;justify-content:space-between;gap:8px;align-items:start}.card h3{font-size:14px;margin:0;line-height:1.2}.count{border-radius:99px;background:var(--sand);padding:4px 9px;font-weight:800;font-size:12px}.thumb{height:54px;border-radius:10px;margin:10px 0;background:linear-gradient(135deg,#d7e4d0,#f0e0c7);display:flex;align-items:center;justify-content:center;font-size:26px}.card p{font-size:12px;line-height:1.45;color:#4f6057;margin:0}.tags{display:flex;flex-wrap:wrap;gap:5px;margin-top:10px}.tag{font-size:10px;padding:4px 8px;border-radius:99px;background:#edf1ec}.timeline{margin-top:14px;border:1px solid var(--line);border-radius:15px;background:var(--panel);overflow:hidden}.tabs{display:flex;gap:7px}.tabs button{border:1px solid var(--line);background:var(--panel);padding:7px 12px;border-radius:99px;font-size:12px}.tabs button.active{background:var(--accent);color:white}.filters{display:flex;gap:8px}.table-head,.event{display:grid;grid-template-columns:110px 170px 1fr 130px 100px;gap:12px;align-items:center}.table-head{font-size:11px;color:#758079;padding:11px 15px;border-bottom:1px solid var(--line)}.event{font-size:12px;padding:11px 15px;border-bottom:1px solid #efeee9}.event:last-child{border:0}.event .proj{font-weight:750}.pill{font-size:10px;padding:4px 8px;border-radius:99px;background:var(--violet);width:max-content}.view{display:none}.view.active{display:block}.journal-page,.projects-page{margin-top:26px}.journal-page h2,.projects-page h2{font-family:Georgia,serif;font-size:28px}.journal-grid{display:grid;grid-template-columns:1fr 300px;gap:18px}.note{background:var(--panel);border:1px solid var(--line);border-radius:15px;padding:18px}.note h3{margin-top:0}.drawer{position:fixed;top:0;right:0;width:390px;height:100vh;background:#fffdf9;border-left:1px solid var(--line);box-shadow:-14px 0 40px rgba(25,54,47,.12);padding:25px;z-index:20;transform:translateX(102%);transition:.22s;overflow:auto}.drawer.open{transform:none}.drawer-close{float:right;border:0;background:transparent;font-size:24px}.drawer h2{font-family:Georgia,serif}.hero-mini{height:130px;border-radius:16px;background:linear-gradient(135deg,#d9e8d4,#eadcc6);display:flex;align-items:center;justify-content:center;font-size:48px}.drawer .statline{display:grid;grid-template-columns:1fr 1fr;gap:9px;margin:16px 0}.mini{background:#f2f3ee;border-radius:12px;padding:12px}.mini strong{display:block;font-size:20px}.milestone{border-left:2px solid #c9d9cc;padding:5px 0 12px 14px;font-size:13px}
+.group-label{grid-column:1/-1;font-size:11px;text-transform:uppercase;letter-spacing:.11em;font-weight:800;color:#6d7c73;margin:6px 0 -2px}
+.path{margin-top:16px}.path h3{margin-bottom:8px}.path-item{display:grid;grid-template-columns:76px 1fr;gap:10px;padding:10px 0;border-bottom:1px solid #ecebe5;font-size:12px}.path-item:last-child{border-bottom:0}.path-date{color:#7a857f}.path-text strong{display:block;margin-bottom:3px}.source-note{font-size:11px;color:#7a857f;margin-top:2px}.special{background:#eef3eb;border-radius:14px;padding:14px;margin:15px 0}.special strong{display:block;margin-bottom:5px}.empty{color:#879088}.mobile-menu{display:none}@media(max-width:1050px){.app{grid-template-columns:1fr}.side{display:none}.projects{grid-template-columns:repeat(3,1fr)}.metrics{grid-template-columns:repeat(2,1fr)}.mobile-menu{display:block}.main{padding:22px}.summary{grid-template-columns:1fr}.table-head,.event{grid-template-columns:90px 140px 1fr 110px}.table-head>*:last-child,.event>*:last-child{display:none}}@media(max-width:700px){.projects{grid-template-columns:1fr 1fr}.top{display:block}.period{margin-top:15px}.metrics{grid-template-columns:1fr 1fr}.drawer{width:100%}.table-head,.event{grid-template-columns:85px 120px 1fr}.table-head>*:nth-child(4),.event>*:nth-child(4){display:none}}
+
+/* V5.5 · Pilotage Ligne de mire */
+.horizon-actions{margin-top:14px;display:flex;justify-content:flex-end}.mire-add-btn,.mire-edit-btn{border:1px solid var(--line);background:var(--paper);color:var(--forest);border-radius:999px;padding:8px 12px;font-weight:800;cursor:pointer}.mire-add-btn:hover,.mire-edit-btn:hover{background:var(--sage-2)}
+.mire-check{display:flex;align-items:center;gap:8px;margin-top:14px;font-size:12px;font-weight:800;color:var(--forest)}.mire-check input{width:18px;height:18px;accent-color:var(--forest)}.mire-card.done{opacity:.72}.mire-card.done .mire-focus{text-decoration:line-through;text-decoration-thickness:1px}.mire-card-actions{display:flex;justify-content:flex-end;margin-top:10px}.mire-sync{font-size:11px;color:var(--muted);margin-left:8px}
+.oree-modal-backdrop{position:fixed;inset:0;background:rgba(21,63,56,.35);display:none;align-items:center;justify-content:center;padding:20px;z-index:1000}.oree-modal-backdrop.open{display:flex}.oree-modal{width:min(620px,100%);max-height:90vh;overflow:auto;background:var(--paper);border:1px solid var(--line);border-radius:24px;padding:24px;box-shadow:0 25px 70px rgba(21,63,56,.22)}.oree-modal h2{font-family:var(--display);font-size:30px;margin:0 0 6px}.oree-modal .context{color:var(--muted);margin-bottom:18px}.oree-form-grid{display:grid;gap:14px}.oree-form-grid label{font-size:12px;font-weight:800;color:var(--forest)}.oree-form-grid input,.oree-form-grid select,.oree-form-grid textarea{width:100%;box-sizing:border-box;margin-top:6px;border:1px solid var(--line);background:#fffdf8;border-radius:12px;padding:11px 12px;font:inherit;color:var(--ink)}.oree-form-grid textarea{min-height:82px;resize:vertical}.oree-modal-actions{display:flex;justify-content:flex-end;gap:10px;margin-top:18px}.oree-modal-actions button{border:1px solid var(--line);border-radius:999px;padding:10px 15px;font-weight:800;cursor:pointer}.oree-modal-actions .primary{background:var(--forest);color:#fffaf0;border-color:var(--forest)}.oree-auth-note{font-size:11px;color:var(--muted);margin-top:10px}
+</style>
+<style>
+:root{--forest:#173f37;--paper:#fff9ed;--line:#d8cbb5;--serif:Georgia,"Times New Roman",serif}
+body{background:radial-gradient(circle at 80% 0,#ead6ad55,transparent 34rem),linear-gradient(135deg,#f6efdf,#fffaf0);color:#173f37}
+aside{background:linear-gradient(180deg,#f8f5e9,#eef0df);border-right:1px solid #d8cbb5}
+.logo,h1,h2,h3{font-family:var(--serif)}.logo{font-size:30px}.motto{font-family:var(--serif);font-size:17px}
+.nav button{border-radius:12px}.nav button.active{background:#dce8d5}
+.main{max-width:1420px}.top h1{font-size:42px}
+.stats{gap:14px}.stat{border:1px solid #d8cbb588;border-radius:18px;box-shadow:0 8px 18px #47361f10}
+.stat:nth-child(1){background:#f8e1dc}.stat:nth-child(2){background:#e1ecd9}.stat:nth-child(3){background:#e1edf2}.stat:nth-child(4){background:#ebe2f3}
+.summary,.timeline,.card{background:#fffaf0e8;border-color:#d8cbb5;box-shadow:0 10px 24px #47361f12}
+.card{overflow:hidden;border-radius:17px}.card:before{content:"📚  🕯️  ✦";display:flex;align-items:flex-end;justify-content:flex-end;height:105px;padding:12px;font-size:28px;background:linear-gradient(135deg,#423b5f,#8b6689 52%,#d0a474);color:white}
+.card:nth-child(2n):before{content:"🍂  🎭  🕯️";background:linear-gradient(135deg,#3c2b22,#96532f 52%,#e0a04b)}
+.card:nth-child(3n):before{content:"🌿  📖  ✦";background:linear-gradient(135deg,#31554b,#81987b 52%,#d8c08a)}
+.card{padding:0}.card>.card-top,.card>p,.card>.tags{margin-left:16px;margin-right:16px}.card>.card-top{margin-top:15px}.card>.tags{margin-bottom:16px}
+#admin{padding-bottom:40px}.admin-grid{display:grid;grid-template-columns:320px 1fr;gap:18px}.admin-list,.admin-editor{background:#fffaf0e8;border:1px solid var(--line);border-radius:18px;padding:18px;box-shadow:0 10px 24px #47361f12}
+.admin-list button{width:100%;text-align:left;border:0;background:transparent;padding:12px;border-radius:11px;color:#173f37}.admin-list button:hover,.admin-list button.selected{background:#e2eadb}
+.admin-editor label{display:block;font-size:13px;font-weight:700;margin:13px 0 6px}.admin-editor input,.admin-editor select,.admin-editor textarea{width:100%;border:1px solid var(--line);background:#fffdf7;border-radius:10px;padding:10px;color:#173f37}.admin-editor textarea{min-height:78px}
+.form-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px}.upload{border:1px dashed #b6a589;border-radius:13px;padding:18px;text-align:center;background:#faf2e5}.cover-preview{height:150px;border-radius:14px;margin-top:10px;background:linear-gradient(135deg,#423b5f,#8b6689,#d0a474);display:flex;align-items:end;padding:15px;color:white;font-family:var(--serif);font-size:19px}
+.actions{display:flex;gap:8px;flex-wrap:wrap;margin-top:18px}.primary,.secondary,.danger{border:0;border-radius:11px;padding:10px 14px}.primary{background:#173f37;color:white}.secondary{background:#e9e4d8;color:#173f37}.danger{background:#f1d8d1;color:#733b32}.note{font-size:13px;line-height:1.5;color:#66736c;background:#edf1e5;border-radius:12px;padding:12px;margin-top:12px}
+.project-hero{height:205px;border-radius:20px;background:linear-gradient(120deg,#342d50,#76577f 50%,#c48f75);color:white;padding:28px;display:flex;align-items:end;position:relative;overflow:hidden}.project-hero:after{content:"📚  🕯️  🧭";position:absolute;right:35px;top:38px;font-size:48px}.project-hero h1{color:white;margin:0}
+.tabs{display:flex;gap:6px;margin:14px 0 18px}.tabs button{border:1px solid var(--line);background:#f5efe4;padding:9px 15px;border-radius:10px}.tabs button.active{background:#6d5a48;color:white}
+.detail-grid{display:grid;grid-template-columns:1fr 1fr;gap:16px}.panel{background:#fffaf0e8;border:1px solid var(--line);border-radius:16px;padding:20px}.progressbar{height:8px;background:#eee4d5;border-radius:99px;overflow:hidden}.progressbar span{display:block;height:100%;width:55%;background:#9464a5}.metrics{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:14px}.metric{background:#f7eee1;border-radius:12px;padding:14px}.metric strong{font-family:var(--serif);font-size:28px;display:block}
+@media(max-width:850px){.admin-grid,.detail-grid,.form-grid{grid-template-columns:1fr}}
+</style>
+<style>
+.nav button[data-view="projects"]{display:none!important}
+.home-filterbar{display:flex;gap:8px;flex-wrap:wrap;align-items:center;margin:18px 0 22px;padding:10px 12px;background:#fffaf0aa;border:1px solid var(--line);border-radius:15px}
+.home-filterbar button{border:0;background:#ece8dc;color:#28483f;border-radius:999px;padding:8px 12px}.home-filterbar button.active{background:#173f37;color:#fff}
+.card:before{content:""!important;background:linear-gradient(135deg,#52685d,#91a28c,#d8c7a5)!important}
+.month-row{display:grid;grid-template-columns:140px 1fr;gap:12px;padding:14px 0;border-bottom:1px solid #e7dcc9}.month-name{font-family:var(--serif);font-weight:800}.pill{display:inline-block;background:#eee7db;border-radius:999px;padding:6px 9px;font-size:12px;margin-right:5px}
+.admin-list button{cursor:pointer}.admin-list button.selected{background:#e2eadb}
+</style>
+<style>
+/* ORÉE V4.4 — paysage continu */
+.nav button[data-view="projects"]{display:none!important}
+.stats{display:grid!important;grid-template-columns:repeat(4,minmax(0,1fr))!important;gap:12px!important}
+.stat{aspect-ratio:1.18/1;min-height:0!important;padding:16px!important}
+.stat strong{font-size:34px!important;margin:7px 0 3px!important}
+#projectDetail{display:none!important}
+.oree-landscape{margin-top:20px}
+.oree-filterbar{display:flex;align-items:center;gap:8px;flex-wrap:wrap;margin:0 0 18px;padding:10px 12px;background:#fffaf0bb;border:1px solid var(--line);border-radius:15px}
+.oree-filterbar button{border:0;background:#ece8dc;color:#28483f;border-radius:999px;padding:8px 12px}
+.oree-filterbar button.active{background:#173f37;color:#fff}
+.oree-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:16px}
+.oree-card{overflow:hidden;border:1px solid #d8cbb5;background:#fffaf0e8;border-radius:17px;box-shadow:0 10px 24px #47361f12;cursor:pointer;transition:.18s}
+.oree-card:hover{transform:translateY(-2px);box-shadow:0 15px 28px #47361f1c}
+.oree-cover{height:128px;background:linear-gradient(135deg,#52685d,#91a28c,#d8c7a5);display:flex;align-items:end;padding:14px;color:#fff;font-family:var(--serif);font-size:19px}
+.oree-card[data-domain="Écriture"] .oree-cover{background:linear-gradient(135deg,#403653,#765a7c,#c4a078)}
+.oree-card[data-name="Le Bal des Esprits"] .oree-cover{background:linear-gradient(135deg,#3d2a22,#925231,#d99a4a)}
+.oree-card[data-domain="Podcast"] .oree-cover{background:linear-gradient(135deg,#584258,#a1778b,#ddbc94)}
+.oree-card[data-domain="Projets à venir"] .oree-cover{background:linear-gradient(135deg,#405943,#91a973,#d6c98f)}
+.oree-body{padding:15px}.oree-head{display:flex;justify-content:space-between;gap:10px;align-items:start}.oree-head h3{margin:0 0 4px}.oree-tag{display:inline-block;background:#eee7db;border-radius:999px;padding:5px 8px;font-size:11px;white-space:nowrap}.oree-body p{color:#596a62;line-height:1.45;margin:7px 0}
+.oree-value{font-family:var(--serif);font-size:19px;font-weight:800}
+.drawer{width:min(560px,94vw)!important}
+.drawer-hero{height:145px;border-radius:15px;background:linear-gradient(135deg,#43574e,#91a18d,#d4c09a);padding:18px;color:#fff;display:flex;align-items:end;margin:8px 0 16px}
+.drawer-hero h2{margin:0;color:#fff;font-size:27px}.drawer-tag{display:inline-block;background:#eee7db;border-radius:999px;padding:5px 8px;font-size:11px;margin-bottom:10px}
+.drawer-metrics{display:grid;grid-template-columns:1fr 1fr;gap:9px;margin:12px 0}.drawer-metric{background:#f6eee1;border-radius:12px;padding:13px}.drawer-metric strong{font-family:var(--serif);font-size:25px;display:block}
+.history{margin-top:18px}.history details{border-top:1px solid #e5dac8;padding:12px 0}.history summary{cursor:pointer;font-family:var(--serif);font-weight:800;list-style:none;display:flex;justify-content:space-between}.history summary::-webkit-details-marker{display:none}.history summary:after{content:"⌄";font-family:var(--sans)}.history details[open] summary:after{content:"⌃"}.history-content{padding:12px 4px 2px;color:#506159;line-height:1.55}.history-pills{display:flex;gap:6px;flex-wrap:wrap;margin:7px 0 12px}.history-pill{background:#eee7db;border-radius:999px;padding:5px 8px;font-size:12px}.history-entry{padding:8px 0;border-bottom:1px dashed #e4d8c5}.history-entry:last-child{border:0}
+#journal .timeline{display:block!important}
+.archive-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:14px}.archive-card{border:1px solid #d8cbb5;background:#fffaf0e8;border-radius:16px;padding:17px;cursor:pointer}.archive-card:hover{background:#f7f0e3}.archive-card h3{margin-bottom:5px}
+@media(max-width:950px){.oree-grid,.archive-grid{grid-template-columns:1fr 1fr}.stats{grid-template-columns:repeat(4,minmax(120px,1fr))!important;overflow-x:auto}}
+@media(max-width:650px){.oree-grid,.archive-grid{grid-template-columns:1fr}.stats{grid-template-columns:repeat(2,1fr)!important}.stat{aspect-ratio:auto}.drawer-metrics{grid-template-columns:1fr}}
+</style>
+
+<style id="oree-v45-fixes">
+/* Four compact KPI cards, always one row on desktop */
+.stats{
+  display:grid !important;
+  grid-template-columns:repeat(4,minmax(0,1fr)) !important;
+  grid-auto-flow:column !important;
+  gap:12px !important;
+  width:100% !important;
+}
+.stats .stat{
+  width:auto !important;
+  min-width:0 !important;
+  min-height:118px !important;
+  aspect-ratio:auto !important;
+  padding:16px 18px !important;
+}
+.stats .stat strong{
+  font-size:34px !important;
+  line-height:1 !important;
+  margin:12px 0 6px !important;
+}
+.stats .stat small{font-size:13px !important}
+@media(max-width:760px){
+  .stats{grid-template-columns:repeat(4,minmax(145px,1fr)) !important;overflow-x:auto !important}
+}
+
+/* Clean back-office list: one canonical list only */
+.admin-list #oreeAdminCanonical{display:grid;gap:4px;margin-top:8px}
+.admin-list #oreeAdminCanonical button{
+  width:100%;text-align:left;border:0;background:transparent;
+  padding:12px 14px;border-radius:12px;color:#173f37
+}
+.admin-list #oreeAdminCanonical button.selected,
+.admin-list #oreeAdminCanonical button:hover{background:#dfe8d8}
+</style>
+
+<style id="oree-v46-kpis">
+.oree-kpi-row{
+ display:grid!important;
+ grid-template-columns:repeat(4,minmax(0,1fr))!important;
+ gap:12px!important;
+ width:100%!important;
+ margin:0 0 18px!important;
+}
+.oree-kpi{
+ min-width:0!important;
+ min-height:126px!important;
+ border-radius:17px!important;
+ padding:17px 18px!important;
+ border:1px solid rgba(80,65,45,.06)!important;
+}
+.oree-kpi-writing{background:#f7e3e0!important}
+.oree-kpi-journal{background:#e3eddf!important}
+.oree-kpi-com{background:#e1edf2!important}
+.oree-kpi-domains{background:#ebe3f3!important}
+.oree-kpi .label{font-weight:800!important;font-size:14px!important;white-space:normal!important}
+.oree-kpi strong{display:block!important;font-family:var(--serif)!important;font-size:32px!important;line-height:1!important;margin:15px 0 7px!important}
+.oree-kpi small{display:block!important;color:#65736c!important;font-size:12px!important;line-height:1.3!important}
+@media(max-width:900px){
+ .oree-kpi-row{grid-template-columns:repeat(4,minmax(180px,1fr))!important;overflow-x:auto!important;padding-bottom:5px}
+}
+</style>
+<style id="oree-v5-design-system">
+:root{--forest:#153f38;--cream:#f7f0df;--paper:#fffaf0;--line:#ded2bd;--sage:#dfe9d8;--blush:#f4dfdc;--blue:#dce9ef;--lav:#e9e1f1;--gold:#b58b4c;--serif:"Cormorant Garamond","Iowan Old Style",Palatino,Georgia,serif;--body:"Lora",Palatino,Georgia,serif}
+body{margin:0!important;background:radial-gradient(circle at 8% 0,rgba(214,198,157,.2),transparent 28rem),radial-gradient(circle at 94% 12%,rgba(180,202,179,.15),transparent 30rem),var(--cream)!important;color:var(--forest)!important;font-family:var(--body)!important}
+h1,h2,h3,.logo,.oree-brand-name,.oree-kpi strong,.oree-value{font-family:var(--serif)!important}
+body>aside:first-of-type,.shell>aside:first-child,.layout>aside:first-child{display:none!important}.shell,.layout{display:block!important;grid-template-columns:none!important}
+.oree-topbar{position:sticky;top:0;z-index:100;background:rgba(255,250,240,.94);backdrop-filter:blur(16px);border-bottom:1px solid rgba(181,139,76,.2);box-shadow:0 4px 22px rgba(52,40,25,.05)}
+.oree-topbar-inner{max-width:1540px;margin:auto;min-height:82px;padding:0 34px;display:flex;align-items:center;justify-content:space-between;gap:28px}.oree-brand{display:flex;align-items:baseline;gap:14px}.oree-brand-name{font-size:34px;font-weight:800;letter-spacing:.06em}.oree-brand-tagline{font-family:var(--serif);font-style:italic;color:#7d765f}
+.oree-topnav{display:flex;gap:7px;align-items:center}.oree-topnav button{border:0;background:transparent;color:var(--forest);font:600 14px var(--body);padding:10px 14px;border-radius:999px;cursor:pointer}.oree-topnav button:hover{background:#edf2e8}.oree-topnav button.active{background:var(--forest);color:#fffaf0}.oree-topnav .admin-nav{border:1px solid var(--line)}
+.main{max-width:1540px!important;width:calc(100% - 56px)!important;margin:0 auto!important;padding:34px 0 70px!important}.top h1{font-size:clamp(38px,4vw,58px)!important;color:var(--forest)!important}
+.oree-kpi-row{display:grid!important;grid-template-columns:repeat(4,minmax(0,1fr))!important;gap:14px!important}.oree-kpi{min-height:112px!important;padding:17px 19px!important;border-radius:18px!important}.oree-kpi-writing{background:var(--blush)!important}.oree-kpi-journal{background:var(--sage)!important}.oree-kpi-com{background:var(--blue)!important}.oree-kpi-domains{background:var(--lav)!important}.oree-kpi strong{font-size:34px!important;color:var(--forest)!important}.oree-kpi .label{font-family:var(--body)!important;color:var(--forest)!important}
+.summary,.timeline,.panel,.admin-list,.admin-editor,.oree-card,.archive-card{background:rgba(255,250,240,.92)!important;border:1px solid var(--line)!important;box-shadow:0 12px 30px rgba(58,43,28,.08)!important}.oree-card{border-radius:20px!important}.oree-cover{height:145px!important;font-family:var(--serif)!important;font-size:22px!important}.oree-filterbar button.active,.home-filterbar button.active,.primary{background:var(--forest)!important;color:white!important}
+.drawer{background:var(--paper)!important;border-left:1px solid var(--line)!important;box-shadow:-18px 0 45px rgba(48,36,23,.13)!important}
+@media(max-width:760px){.oree-topbar{position:relative}.oree-topbar-inner{display:block;padding:14px 20px}.oree-brand{margin-bottom:12px}.oree-topnav{overflow-x:auto}.oree-kpi-row{grid-template-columns:repeat(4,minmax(155px,1fr))!important;overflow-x:auto}.main{width:calc(100% - 34px)!important}}
+
+/* V5.1 · Ligne d'horizon */
+.horizon-page{margin-top:26px}.horizon-intro{display:grid;grid-template-columns:1.25fr .75fr;gap:18px;margin:22px 0}.horizon-manifesto,.breath-card{border:1px solid var(--line);background:var(--paper);border-radius:22px;padding:22px}.horizon-manifesto{background:linear-gradient(135deg,var(--sage-2),var(--paper))}.horizon-manifesto h2,.breath-card h2{font-family:var(--display);margin:0 0 8px}.horizon-manifesto p,.breath-card p{margin:0;color:var(--muted);line-height:1.6}.horizon-period{display:flex;align-items:center;justify-content:space-between;gap:16px;margin:28px 0 14px}.horizon-period h2{font-family:var(--display);font-size:28px;margin:0}.horizon-period .quarter{padding:8px 13px;border-radius:999px;background:var(--forest);color:#fffaf0;font-weight:700}.horizon-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:14px}.horizon-card{border:1px solid var(--line);background:var(--paper);border-radius:18px;padding:18px;box-shadow:0 5px 18px rgba(21,63,56,.05);position:relative}.horizon-card.dim{opacity:.68}.horizon-card h3{font-family:var(--display);font-size:23px;margin:8px 0 3px}.horizon-parent{font-size:11px;text-transform:uppercase;letter-spacing:.09em;color:var(--muted);font-weight:800}.horizon-type{display:inline-flex;padding:4px 9px;border-radius:999px;background:var(--sage-2);font-size:11px;font-weight:800}.horizon-card[data-nature='Écriture'] .horizon-type{background:var(--lavender)}.horizon-card[data-nature='Run'] .horizon-type{background:var(--blue)}.horizon-cap{font-weight:700;line-height:1.45;margin:14px 0}.wave{border-top:1px solid var(--line);padding-top:12px;margin-top:12px}.wave small,.finish small{display:block;text-transform:uppercase;letter-spacing:.08em;color:var(--muted);font-size:10px;font-weight:800;margin-bottom:4px}.wave p,.finish p{margin:0;font-size:13px;line-height:1.45}.finish{margin-top:10px;padding:11px 12px;border-radius:12px;background:var(--cream)}.horizon-state{position:absolute;top:16px;right:16px;font-size:10px;padding:4px 8px;border-radius:999px;background:var(--blush);font-weight:800}.horizon-state.on{background:var(--sage)}.horizon-rule{margin-top:18px;padding:16px 18px;border:1px dashed #c9bfae;border-radius:16px;background:#fffaf080;font-family:var(--display);font-size:18px}.overview-horizon{margin:18px 0 0;border:1px solid var(--line);border-radius:18px;background:linear-gradient(120deg,var(--paper),var(--sage-2));padding:18px 20px;display:flex;align-items:center;gap:18px}.overview-horizon strong{font-family:var(--display);font-size:20px}.overview-horizon p{margin:4px 0 0;color:var(--muted);font-size:13px}.overview-horizon button{margin-left:auto;border:1px solid var(--line);background:var(--paper);border-radius:999px;padding:9px 13px;font-weight:700}.horizon-source{font-size:11px;color:var(--muted);margin-top:14px}.breath-card{background:linear-gradient(145deg,#fffaf0,#f4dfdc55)}.breath-card .moon{font-size:28px;margin-bottom:8px}.breath-card strong{color:var(--forest)}
+@media(max-width:980px){.horizon-grid{grid-template-columns:repeat(2,minmax(0,1fr))}.horizon-intro{grid-template-columns:1fr}}@media(max-width:650px){.horizon-grid{grid-template-columns:1fr}.overview-horizon{align-items:flex-start;flex-wrap:wrap}.overview-horizon button{margin-left:0}}
+
+/* V5.3 · Ligne de mire mensuelle */
+.mire-block{margin-top:34px;padding-top:28px;border-top:1px solid var(--line)}
+.mire-head{display:flex;justify-content:space-between;align-items:end;gap:16px;margin-bottom:14px}.mire-head h2{font-family:var(--display);font-size:28px;margin:0}.mire-head p{margin:4px 0 0;color:var(--muted);font-size:13px}.mire-month{border:1px solid var(--line);background:var(--paper);border-radius:999px;padding:8px 13px;font-weight:700;color:var(--forest)}
+.mire-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:14px}.mire-card{border:1px solid var(--line);background:linear-gradient(145deg,var(--paper),#fffdf8);border-radius:18px;padding:18px;position:relative;box-shadow:0 5px 18px rgba(21,63,56,.045)}.mire-card.dim{opacity:.68}.mire-parent{font-size:11px;text-transform:uppercase;letter-spacing:.09em;color:var(--muted);font-weight:800}.mire-card h3{font-family:var(--display);font-size:23px;margin:7px 0 12px}.mire-focus{padding:12px 13px;border-radius:13px;background:var(--sage-2);line-height:1.48;font-weight:700}.mire-finish{margin-top:10px;padding-top:11px;border-top:1px solid var(--line)}.mire-finish small{display:block;text-transform:uppercase;letter-spacing:.08em;color:var(--muted);font-size:10px;font-weight:800;margin-bottom:4px}.mire-finish p{margin:0;font-size:13px;line-height:1.45}.mire-state{position:absolute;top:16px;right:16px;font-size:10px;padding:4px 8px;border-radius:999px;background:var(--blush);font-weight:800}.mire-state.on{background:var(--sage)}.mire-source{font-size:11px;color:var(--muted);margin-top:12px}.mire-empty{grid-column:1/-1;border:1px dashed #c9bfae;border-radius:16px;background:#fffaf080;padding:20px;color:var(--muted);text-align:center}
+@media(max-width:760px){.mire-grid{grid-template-columns:1fr}.mire-head{align-items:flex-start;flex-direction:column}}
+
+.side{display:none!important}.app{display:block!important}.main{width:min(1500px,calc(100% - 48px))!important;margin:0 auto!important}.oree-brand:focus-visible{outline:2px solid var(--gold);outline-offset:4px;border-radius:8px}
+
+.oree-auth-btn{border:1px solid var(--line)!important;background:var(--paper)!important;border-radius:999px!important;padding:9px 14px!important;font-weight:700!important}.oree-auth-btn.connected{background:var(--sage)!important}.oree-auth-modal{position:fixed;inset:0;background:rgba(20,42,36,.34);display:none;align-items:center;justify-content:center;z-index:100;padding:20px}.oree-auth-modal.open{display:flex}.oree-auth-card{width:min(430px,100%);background:var(--paper);border:1px solid var(--line);border-radius:22px;padding:24px;box-shadow:0 24px 70px rgba(21,63,56,.18)}.oree-auth-card h2{font-family:var(--display);font-size:28px;margin:0 0 6px}.oree-auth-card p{color:var(--muted);line-height:1.5;margin:0 0 18px}.oree-auth-card label{display:block;font-size:12px;font-weight:800;margin:12px 0 5px}.oree-auth-card input{width:100%;border:1px solid var(--line);background:#fffdf8;border-radius:12px;padding:11px 12px;font:inherit}.oree-auth-actions{display:flex;gap:9px;justify-content:flex-end;margin-top:18px}.oree-auth-actions button{border:1px solid var(--line);border-radius:999px;padding:9px 14px;background:var(--paper);font-weight:700}.oree-auth-actions .primary{background:var(--forest);color:#fffaf0}.oree-auth-error{font-size:12px;color:#9a4b45;min-height:18px;margin-top:10px}.oree-auth-user{font-size:12px;color:var(--muted);margin-top:10px;word-break:break-all}
+</style><script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script></head><body><header class="oree-topbar"><div class="oree-topbar-inner"><button class="oree-brand" id="oreeHome" type="button" aria-label="Accueil Orée" style="border:0;background:transparent;text-align:left;padding:0;cursor:pointer"><div class="oree-brand-name">ORÉE</div><div class="oree-brand-tagline">Regarder le chemin parcouru.</div></button><nav class="oree-topnav"><button data-top-view="horizon">Horizon</button><button data-top-view="mire">Ligne de mire</button><button data-top-view="journal">Journal d’avancement</button><button data-top-view="archives">Archives</button><button class="admin-nav" data-top-view="admin">Atelier d’Orée</button><button class="oree-auth-btn" id="oreeAuthBtn" type="button">Connexion</button></nav></div></header><div class='app'>
+
+<main class='main'>
+<section id='overview' class='view active'><div class='top'><div><h1>Bonjour Cordélia ! ♡</h1><p>Regarde le chemin parcouru.</p></div><div class='period'><select id='period'><option>Octobre 2026</option><option>Septembre 2026</option><option>Août 2026</option><option>Cette année</option></select><button>‹</button><button>›</button></div></div>
+<div class='oree-kpi-row'>
+<div class='oree-kpi oree-kpi-writing'><div class='label'>✍️ Écriture · Atelier</div><strong id='homeWords'>0</strong><small id='homeWordsLabel'>mots écrits en octobre</small></div>
+<div class='oree-kpi oree-kpi-journal'><div class='label'>🌱 Avancées · Journal</div><strong id='homeJournalCount'>0</strong><small id='homeJournalLabel'>avancées en octobre</small></div>
+<div class='oree-kpi oree-kpi-com'><div class='label'>📣 Communication · Todum</div><strong id='homeComCount'>0</strong><small>tâches terminées · Genre = Communication</small></div>
+<div class='oree-kpi oree-kpi-domains'><div class='label'>🧭 Domaines en mouvement</div><strong id='homeDomainCount'>0</strong><small>domaines en mouvement ce mois-ci</small></div>
+</div>
+ <div class="oree-filterbar" id="oreeFilters">
+  <strong>Afficher</strong>
+  <button class="active" data-o-filter="Tous">Tous</button>
+  <button data-o-filter="Écriture">Écriture</button>
+  <button data-o-filter="Outils">Outils</button>
+  <button data-o-filter="Podcast">Podcast</button>
+  <button data-o-filter="Projets à venir">Projets à venir</button>
+  <button data-o-filter="Communication">Communication</button>
+  <button data-o-filter="Autre">Autre</button>
+ </div>
+ <div class="oree-grid" id="oreeGrid"></div>
+</section>
+
+<section id="horizon" class="view horizon-page">
+ <div class="top"><div><h1>🌄 Ligne d’horizon</h1><p>Les vagues choisies pour le trimestre, lues depuis le Journal de bord.</p></div><div class="period"><select id="horizonPeriod"><option>T4 2026</option></select></div></div>
+ <div class="horizon-period"><div><h2>Horizon trimestriel</h2><p id="horizonSubtitle">Chargement de la Ligne d’horizon…</p></div><span class="quarter" id="horizonQuarter">T4 2026</span></div>
+ <div class="horizon-grid" id="horizonGrid"></div>
+ <div class="horizon-source" id="horizonSource">◌ Connexion au Journal de bord…</div>
+
+</section>
+
+<section id="mire" class="view horizon-page">
+ <div class="top"><div><h1>🎯 Ligne de mire</h1><p>Ce qui reçoit réellement de l’attention ce mois-ci.</p></div></div>
+ <div class="mire-block" style="margin-top:0;padding-top:0;border-top:0">
+   <div class="mire-head"><div><h2>🎯 Ligne de mire</h2><p>Les fronts du trimestre qui reçoivent réellement de l’attention ce mois-ci.</p></div><select class="mire-month" id="mireMonth"><option>Octobre 2026</option><option>Novembre 2026</option><option>Décembre 2026</option></select></div>
+   <div class="mire-grid" id="mireGrid"></div>
+   <div class="mire-source" id="mireSource">◌ Connexion à « Ligne de mire »…</div>
+ </div>
+</section>
+
+<section id='journal' class='view journal-page'><div class='top'><div><h1>Journal d’avancement</h1><p>Les traces qualitatives qui racontent ce qui a réellement bougé.</p></div></div><div class='timeline' style='margin-top:24px'><div class='table-head'><span>Date</span><span>Projet</span><span>Avancée</span><span>Catégorie</span><span>Source</span></div><div id='journalEvents'></div></div></section>
+<section id='projects' class='view projects-page'><div class='top'><div><h1>Projets</h1><p>Une lecture transversale de tout ce qui a bougé.</p></div></div><div class='projects' id='allProjectCards' style='margin-top:24px'></div></section><section id='archives' class='view projects-page'>
+<div class='top'><div><h1>🍂 Archives</h1><p>Les projets terminés quittent la vue active sans perdre leur chemin.</p></div></div>
+<div class='summary' style='margin-top:24px'><div><h2>Aucun projet d’écriture archivé pour l’instant.</h2><p>Un manuscrit reste actif tant que tous ses chapitres ne sont pas <strong>Rédigé</strong>. Il reste visible pendant son mois d’achèvement, puis rejoint automatiquement les Archives à la période suivante.</p></div><blockquote>« Rien ne disparaît.<br>Le chemin reste. »</blockquote></div>
+<div class='section-head'><div><h2>📚 Écriture terminée</h2><p>0 projet archivé</p></div></div>
+<div class='projects'><div class='empty' style='grid-column:1/-1;padding:28px'>Équation du Chaos T2 et Le Bal des Esprits sont encore en cours. 🌿</div></div>
+
+<div class="archive-grid" id="oreeArchives">
+ <article class="archive-card" data-archive="Exemple de manuscrit terminé"><span class="oree-tag">Écriture</span><h3>Les projets terminés vivront ici</h3><p>Quand un manuscrit atteint son signal de fin, Orée conserve son chemin mensuel et son bilan final.</p></article>
+ <article class="archive-card" data-archive="Exemple d’outil archivé"><span class="oree-tag">Outils</span><h3>Archives de projets</h3><p>Les projets réellement achevés restent consultables sans encombrer le paysage actif.</p></article>
+</div>
+</section>
+
+<section id='admin' class='view projects-page'>
+ <div class='top'><div><h1>⚙️ Atelier d’Orée</h1><p>Configure les fiches et les images sans modifier les sources.</p></div><button class='primary' id='newProjectBtn' type='button'>＋ Nouveau projet</button></div>
+ <div class='admin-grid'>
+  <div class='admin-list'><h2>Projets Orée</h2>
+   <button class='selected' type='button'>✦ Équation du Chaos<br><small>Écriture · Atelier</small></button>
+   <button type='button'>🍂 Le Bal des Esprits<br><small>Écriture · Atelier</small></button>
+   <button type='button'>🌱 Registre Pépinière<br><small>Projets à venir</small></button>
+   <button type='button'>🎙️ La Charentaise<br><small>Podcast</small></button>
+   <button type='button'>🛠️ Passerelle<br><small>Outils</small></button>
+   <div class='note'>🔒 Cette page configure uniquement Orée. Les sources restent en lecture seule.</div>
+  </div>
+  <form class='admin-editor' id='projectForm'><h2 id='editorTitle'>Équation du Chaos</h2>
+   <div class='form-grid'><div><label>Nom d’affichage</label><input id='fName' value='Équation du Chaos'></div><div><label>Domaine</label><select><option>Écriture</option><option>Communication</option><option>Outils</option><option>Projets à venir</option><option>Podcast</option><option>Autre</option></select></div></div>
+   <label>Sous-titre</label><input id='fSubtitle' value='T2 · La Substitution'>
+   <div class='form-grid'><div><label>Source spécialisée</label><select><option>Atelier → Chapitres</option><option>Journal Orée</option><option>Todum DB</option><option>Registre Pépinière</option><option>La Charentaise</option></select></div><div><label>ID dans la source</label><input id='fId' value='EC-T2'></div></div>
+   <label>Image de couverture</label><div class='upload'><div style='font-size:35px'>🖼️</div><strong>Choisir l’illustration du projet</strong><br><small>PNG, JPG ou WebP</small><br><input id='coverInput' type='file' accept='image/png,image/jpeg,image/webp' style='margin-top:10px'></div>
+   <div class='cover-preview' id='coverPreview'>Équation du Chaos · T2</div>
+   <div class='form-grid'><div><label>Affichage</label><select><option>Actif</option><option>Masqué</option><option>Archivé manuellement</option></select></div><div><label>Ordre</label><input type='number' min='1' value='1'></div></div>
+   <label>Note interne Orée</label><textarea placeholder="Contexte d’affichage ou choix visuel…"></textarea>
+   <div class='actions'><button class='primary' type='submit'>Enregistrer dans Orée</button><button class='secondary' id='previewBtn' type='button'>Voir la page projet</button><button class='danger' type='button'>Retirer d’Orée</button></div>
+   <div class='note' id='status'>Prototype : les réglages restent locaux et n’écrivent dans aucune source.</div>
+  </form>
+ </div>
+</section>
+
+<section id='projectDetail' class='view projects-page'>
+ <div class='top'><div><h1>Équation du Chaos</h1><p>T2 · La Substitution</p></div><button class='secondary' data-view='projects' type='button'>← Projets</button></div>
+ <div class='project-hero'><div><small>Écriture · Voxinaë</small><h1>Équation du Chaos</h1><div>T2 · La Substitution</div></div></div>
+ <div class='tabs'><button class='active' type='button'>Aperçu</button><button type='button'>Chapitres</button><button type='button'>Journal</button><button type='button'>Statistiques</button></div>
+ <div class='detail-grid'>
+  <div class='panel'><h2>Avancement global</h2><strong style='font-family:var(--serif);font-size:28px'>22 / 40</strong> chapitres<div class='progressbar'><span></span></div><div class='metrics'><div class='metric'><strong>11</strong>chapitres écrits en septembre</div><div class='metric'><strong>27 850</strong>mots écrits en septembre</div></div></div>
+  <div class='panel'><h2>Dernières avancées</h2><p><strong>24/09</strong> · Chapitre 22 · La mésange et le loup</p><p><strong>23/09</strong> · Chapitre 21 · Ce que nous héritons</p><p><strong>18/09</strong> · Chapitre 20 · Notre refuge</p></div>
+ </div>
+ <div class='panel' style='margin-top:16px;text-align:center;font-family:var(--serif);font-style:italic'>« Chaque chapitre est une marche de plus sur le chemin. » 🌙</div>
+</section>
+</main></div><aside class='drawer' id='drawer'><button class='drawer-close' onclick='closeDrawer()'>×</button><div id='drawerBody'></div></aside>
+<script>
+const projects=[
+{name:'Passe-ailes',group:'🛠️ Outils',icon:'🦋',count:8,desc:'De la conception à un cockpit professionnel connecté à Passerelle et Supabase.',tags:['Outil','Développement'],source:'Journal Orée',milestones:['Architecture et wireframes','V1 puis V2','Persistance Supabase','Connexion vivante à Passerelle','Planning éditorial enrichi']},
+{name:'Passerelle',group:'🛠️ Outils',icon:'🌉',count:7,desc:'Imports, recherche globale, Bible visuelle, partage, Manuscrit et rattachements.',tags:['Outil','Organisation'],source:'Journal Orée',milestones:['Imports Notion','Recherche globale','Bible visuelle','Manuscrit fiabilisé']},
+{name:'Todum',group:'🛠️ Outils',icon:'🌿',count:7,desc:'Base connectée, versions saisonnières, Inbox vocale, Types et Carry On.',tags:['Outil','Organisation'],source:'Journal Orée + Todum DB',milestones:['Todum DB','V2 connectée','V3 saisonnière','Inbox vocale','Types']},
+{name:'Sonate',group:'🛠️ Outils',icon:'🎼',count:4,desc:'Capture vocale et circuit de collecte fiabilisés.',tags:['Outil','Développement'],source:'Journal Orée',milestones:['Dictée mobile fiabilisée','Dictée continue','Circuit vers Pépinière']},
+{name:'Registre Pépinière',group:'🌱 Projets à venir',icon:'🌱',count:4,desc:'Les idées et futurs projets suivent leurs vrais niveaux de maturation.',tags:['Idées','Organisation'],source:'Registre Pépinière + Journal Orée',metrics:[['Graines','17'],['Semis','6'],['Développements','6'],['Boutures','5']],milestones:['Registre restructuré','Premiers Semis implantés','Circuit Sonate → Boutures']},
+{name:'La Charentaise dans la Parenthèse',group:'🎙️ Podcasts',icon:'🎙️',count:4,desc:'Un projet podcast autonome avec sa propre source et son propre parcours.',tags:['Podcast','Création'],source:'La Charentaise dans la Parenthèse + Journal Orée',metrics:[['Épisodes créés','3'],['Idées disponibles','15'],['Prêts / programmés','1'],['Publiés','0']],milestones:['CP001 prêt · sortie 18/10/2026','CP002 enregistré','CP003 enregistré','15 idées disponibles','Prochain épisode à produire : 018 · Comment toucher des lecteurs quand on est auteur indépendant ?']},
+{name:'Équation du Chaos',group:'✍️ Écriture',icon:'✦',count:'11 chapitres',desc:'La Substitution · chapitres rédigés pendant la période affichée.',tags:['Écriture','Univers'],source:'Atelier → Chapitres + Journal Orée',metrics:[['Septembre','11 chapitres'],['Rédigés au total','22 / 40'],['Restants','18'],['État','En cours']],milestones:['Direction artistique verrouillée','Continuité visuelle','Résumé automatique testé sur le manuscrit']},
+{name:'Le Bal des Esprits',group:'✍️ Écriture',icon:'🍂',count:'6 chapitres',desc:'Manuscrit en cours · chapitres rédigés pendant la période affichée.',tags:['Écriture','Univers'],source:'Atelier → Chapitres + Journal Orée + Todum',metrics:[['Septembre','6 chapitres'],['Rédigés au total','6 / 28'],['Restants','22'],['État','En cours']],milestones:['Plan 28 chapitres','Galerie personnages','Chapitre 5 et continuité visuelle']},
+{name:'Communication',group:'📣 Communication',icon:'📣',count:8,desc:'Posts, stories, reels, annonces, campagnes et préparation de sorties.',tags:['Communication','Transversal'],source:'Todum DB · Genre = Communication',special:'8 tâches de communication terminées en septembre dans Todum DB. La carte ne compte que les lignes dont le Genre est exactement « Communication » et dont la date de réalisation est en septembre.',metrics:[['Terminées','8'],['Source','Todum DB']],milestones:['Créer une présentation TikTok','Stories F&H semaine 2','Diffusion programmée du podcast épisode 1','Story Publication histoires']},
+{name:'Autre',group:'📦 Autre',icon:'📦',count:11,desc:'Les avancées utiles à conserver mais qui ne doivent pas prendre toute la place sur le cockpit.',tags:['Secondaire','Historique'],source:'Journal Orée',special:'Archives auteur, structuration Campus North, identité visuelle ponctuelle et autres traces secondaires sont regroupées ici.',milestones:['33 œuvres archivées migrées','62 idées et 44 sous-pages récupérées','27 personnages Campus North structurés','Travaux visuels ponctuels conservés dans l’historique']}
+];
+const events=[
+['26 sept.','Orée','Journal d’avancement central créé.','Conception','Journal'],
+['25 sept.','Todum','Carry On stabilisé et filtres préservés.','Développement','Journal'],
+['25 sept.','Le Bal des Esprits','Chapitre 5 et continuité visuelle consolidés.','Éditorial','Journal'],
+['24 sept.','La Charentaise dans la Parenthèse','Architecture du micro-hub clarifiée.','Conception','Journal'],
+['22 sept.','Todum','Gestion des Types intégrée au back-office.','Développement','Journal'],
+['21 sept.','Eternal Heaven','Architecture V1 validée et Stani canonique.','Conception','Journal'],
+['20 sept.','Atelier','Résumé automatique validé sur plusieurs chapitres.','Développement','Journal'],
+['20 sept.','Passe-ailes','Planning éditorial et calcul des campagnes enrichis.','Développement','Journal'],
+['19 sept.','Passe-ailes','Persistance Supabase et synchronisation Passerelle.','Développement','Journal'],
+['18 sept.','Passe-ailes','V1 puis V2 livrées.','Développement','Journal'],
+['17 sept.','Todum','Inbox vocale opérationnelle.','Développement','Journal'],
+['14 sept.','Registre Pépinière','Circuit Sonate → Boutures validé.','Technique','Journal'],
+['14 sept.','Sonate','Dictée continue et mobile fiabilisée.','Développement','Journal'],
+['13 sept.','Passe-ailes','Architecture technique et wireframes formalisés.','Conception','Journal'],
+['10 sept.','Passerelle','Imports et rattachements généralisés.','Développement','Journal'],
+['10 sept.','Autre','33 œuvres archivées migrées vers Drive.','Organisation','Journal'],
+['10 sept.','Autre','27 personnages Campus North structurés pour Passerelle.','Organisation','Journal'],
+['8 sept.','Registre Pépinière','Registre restructuré et premiers projets implantés.','Organisation','Journal'],
+['1 sept.','La Charentaise dans la Parenthèse','Premier épisode enregistré et identité sonore amorcée.','Éditorial','Journal']
+];
+const writingProjects=[
+{name:'Équation du Chaos',title:'La Substitution',total:40,written:22,periodChapters:[[12,'Seulement moi','2026-09-01'],[13,'Ce qui nous relie','2026-09-02'],[14,'À mains nues','2026-09-09'],[15,'L’inconnu dans l’équation','2026-09-09'],[16,'La dernière parcelle','2026-09-12'],[17,'Ce dont je suis faite','2026-09-12'],[18,'Suspendu à un fil','2026-09-14'],[19,'Un prêté pour un rendu','2026-09-15'],[20,'Notre refuge','2026-09-18'],[21,'Ce que nous héritons','2026-09-23'],[22,'La mésange et le loup','2026-09-24']]},
+{name:'Le Bal des Esprits',title:'Le Bal des Esprits',total:28,written:6,periodChapters:[[1,'Gressac matin','2026-09-19'],[2,'La couronne Bellerie','2026-09-23'],[3,'Métempsycose','2026-09-23'],[4,'L’amour toujours','2026-09-23'],[5,'Marraine et Giguère','2026-09-25'],[6,'Une vérité recouverte de farine','2026-09-25']]}
+];
+function isWritingComplete(w){return w.total>0&&w.written===w.total}
+function archivedForPeriod(w,periodEnd){if(!isWritingComplete(w))return false;const d=w.periodChapters.map(c=>c[2]).sort().pop();return d&&d.slice(0,7)<periodEnd.slice(0,7)}
+function renderArchives(){const a=writingProjects.filter(w=>archivedForPeriod(w,'2026-09-30')),box=document.getElementById('archiveCards'),count=document.getElementById('archiveCount');if(!box||!count)return;count.textContent=`${a.length} projet${a.length>1?'s':''} archivé${a.length>1?'s':''}`;box.innerHTML=a.length?a.map(w=>`<button class="card"><div class="card-top"><h3>📚 ${w.name}</h3><span class="count">${w.total} chapitres</span></div><p>${w.title} · manuscrit terminé</p></button>`).join(''):`<div class="empty" style="grid-column:1/-1;padding:28px">Les deux manuscrits suivis actuellement sont encore en cours. Ils restent donc dans la vue active. 🌿</div>`}
+function chapterPath(name){const w=writingProjects.find(x=>x.name===name);if(!w)return '';return `<div class='path'><h3>✍️ Chapitres rédigés en septembre</h3>${w.periodChapters.map(c=>`<div class='path-item'><div class='path-date'>${c[2].split('-').reverse().join('/')}</div><div class='path-text'><strong>Chapitre ${c[0]} · ${c[1]}</strong><div class='source-note'>Atelier → Chapitres · Rédigé</div></div></div>`).join('')}</div>`}
+function projectEvents(name){
+ if(name==='Autre') return events.filter(e=>e[1]==='Autre'||e[1]==='Eternal Heaven');
+ if(name==='Communication') return [];
+ if(name==='Équation du Chaos') return events.filter(e=>e[1]==='Atelier'||e[1]==='Équation du Chaos');
+ return events.filter(e=>e[1]===name);
+}
+function cardHTML(p){
+ const count=p.count===null?'à connecter':p.count;
+ return `<button class="card" onclick='openProject(${JSON.stringify(p.name)})'><div class='card-top'><h3>${p.icon} ${p.name}</h3><span class='count'>${count}</span></div><div class='thumb'>${p.icon}</div><p>${p.desc}</p><div class='tags'>${p.tags.map(t=>`<span class='tag'>${t}</span>`).join('')}</div></button>`
+}
+function renderCards(target,list){
+ let last='';
+ target.innerHTML=list.map(p=>{
+   const label=p.group!==last?`<div class="group-label">${p.group}</div>`:'';
+   last=p.group;
+   return label+cardHTML(p);
+ }).join('');
+}
+function eventHTML(e){return `<div class='event'><span>${e[0]}</span><span class='proj'>${e[1]}</span><span>${e[2]}</span><span class='pill'>${e[3]}</span><span>${e[4]}</span></div>`}
+renderCards(projectCards,projects);
+renderCards(allProjectCards,projects);renderArchives();
+document.getElementById('journalEvents').innerHTML=events.map(eventHTML).join('');
+document.querySelectorAll('.nav button').forEach(b=>b.onclick=()=>{document.querySelectorAll('.nav button').forEach(x=>x.classList.remove('active'));b.classList.add('active');document.querySelectorAll('.view').forEach(v=>v.classList.remove('active'));document.getElementById(b.dataset.view).classList.add('active')});
+function openProject(name){
+ const p=projects.find(x=>x.name===name);
+ const pe=projectEvents(name);
+ let metrics=p.metrics?`<div class='statline'>${p.metrics.map(m=>`<div class='mini'><small>${m[0]}</small><strong>${m[1]}</strong></div>`).join('')}</div>`:`<div class='statline'><div class='mini'><small>Journal</small><strong>${p.count===null?'—':p.count}</strong> avancées</div><div class='mini'><small>Source</small><strong style="font-size:13px">${p.source}</strong></div></div>`;
+ const path=pe.length?pe.map(e=>`<div class='path-item'><div class='path-date'>${e[0]}</div><div class='path-text'><strong>${e[2]}</strong><span class='pill'>${e[3]}</span><div class='source-note'>${e[4]}</div></div></div>`).join(''):`<div class='special'>Les données apparaîtront ici dès que la source sera connectée.</div>`;
+ drawerBody.innerHTML=`<h2>${p.icon} ${p.name}</h2><div class='hero-mini'>${p.icon}</div><p>${p.desc}</p><div class='tags'>${p.tags.map(t=>`<span class='tag'>${t}</span>`).join('')}</div><div class='special'><strong>Sources de cette carte</strong>${p.source}</div>${p.special?`<div class='special'>${p.special}</div>`:''}${metrics}${chapterPath(name)}<div class='path'><h3>🌿 Avancées journalisées</h3>${path}</div><h3>Repères</h3>${(p.milestones||[]).map(m=>`<div class='milestone'>${m}</div>`).join('')}<p class='empty'>Orée observe et agrège : aucune tâche n’est créée depuis cette carte.</p>`;
+ drawer.classList.add('open')
+}
+function closeDrawer(){drawer.classList.remove('open')}
+document.addEventListener('keydown',e=>{if(e.key==='Escape')closeDrawer()});
+
+const pf=document.getElementById('projectForm');
+if(pf)pf.addEventListener('submit',e=>{e.preventDefault();const s=document.getElementById('status');s.textContent='✓ Fiche enregistrée dans le prototype. Aucune source externe modifiée.';s.style.background='#dce9d4'});
+const np=document.getElementById('newProjectBtn');
+if(np)np.addEventListener('click',()=>{document.getElementById('editorTitle').textContent='Nouveau projet';['fName','fSubtitle','fId'].forEach(id=>document.getElementById(id).value='');document.getElementById('fName').focus()});
+const ci=document.getElementById('coverInput');
+if(ci)ci.addEventListener('change',()=>{const f=ci.files&&ci.files[0];if(!f)return;const r=new FileReader();r.onload=()=>{document.getElementById('coverPreview').style.background=`linear-gradient(#0002,#0003),url("${r.result}") center/cover`};r.readAsDataURL(f)});
+const pb=document.getElementById('previewBtn');
+if(pb)pb.addEventListener('click',()=>{document.querySelectorAll('.view').forEach(v=>v.classList.remove('active'));document.getElementById('projectDetail').classList.add('active');window.scrollTo(0,0)});
+</script>
+<script>
+(() => {
+  const views = [...document.querySelectorAll('.view')];
+  const navButtons = [...document.querySelectorAll('[data-view]')];
+
+  function showView(id) {
+    views.forEach(v => {
+      v.classList.remove('active');
+      v.style.display = 'none';
+    });
+    const target = document.getElementById(id);
+    if (target) {
+      target.classList.add('active');
+      target.style.display = 'block';
+    }
+    document.querySelectorAll('.nav button').forEach(b => b.classList.toggle('active', b.dataset.view === id));
+    window.scrollTo({top:0, behavior:'smooth'});
+  }
+
+  navButtons.forEach(btn => {
+    btn.addEventListener('click', e => {
+      const id = btn.dataset.view;
+      if (!id) return;
+      e.preventDefault();
+      e.stopImmediatePropagation();
+      showView(id);
+    }, true);
+  });
+
+  // Project cards open the project detail page with a normal single click.
+  document.querySelectorAll('[data-project]').forEach(card => {
+    card.addEventListener('click', e => {
+      e.preventDefault();
+      e.stopImmediatePropagation();
+      showView('projectDetail');
+    }, true);
+  });
+
+  // Detail tabs: real visible panels for the prototype.
+  const detail = document.getElementById('projectDetail');
+  if (detail) {
+    const tabs = [...detail.querySelectorAll('.tabs button')];
+    const panelHost = detail.querySelector('.detail-grid');
+    const originalOverview = panelHost ? panelHost.innerHTML : '';
+    const panels = {
+      'Aperçu': originalOverview,
+      'Chapitres': `<div class="panel" style="grid-column:1/-1"><h2>Chapitres</h2>
+        <p><strong>22 / 40 chapitres rédigés</strong></p>
+        <div class="progressbar"><span></span></div>
+        <p style="margin-top:16px">En septembre : chapitres 12 à 22, soit <strong>11 chapitres rédigés</strong>.</p>
+        <div class="path-item"><div class="path-date">24/09</div><div><strong>22 · La mésange et le loup</strong><div class="source-note">Rédigé · Atelier → Chapitres</div></div></div>
+        <div class="path-item"><div class="path-date">23/09</div><div><strong>21 · Ce que nous héritons</strong><div class="source-note">Rédigé · Atelier → Chapitres</div></div></div>
+        <div class="path-item"><div class="path-date">18/09</div><div><strong>20 · Notre refuge</strong><div class="source-note">Rédigé · Atelier → Chapitres</div></div></div>
+      </div>`,
+      'Journal': `<div class="panel" style="grid-column:1/-1"><h2>Journal du projet</h2>
+        <p>Les avancées Orée associées à Équation du Chaos apparaîtront ici, sans dupliquer les données de la source.</p>
+        <div class="path-item"><div class="path-date">Sept.</div><div><strong>Continuité du Tome 2</strong><div class="source-note">Journal Orée</div></div></div>
+        <div class="path-item"><div class="path-date">Sept.</div><div><strong>Direction visuelle EC2 verrouillée</strong><div class="source-note">Journal Orée</div></div></div>
+      </div>`,
+      'Statistiques': `<div class="panel" style="grid-column:1/-1"><h2>Statistiques</h2>
+        <div class="metrics"><div class="metric"><strong>22</strong>chapitres rédigés au total</div><div class="metric"><strong>11</strong>chapitres rédigés en septembre</div></div>
+        <p style="margin-top:16px;color:#66736c">Cette zone utilisera uniquement les mesures fiables disponibles dans les sources connectées.</p>
+      </div>`
+    };
+    tabs.forEach(tab => tab.addEventListener('click', () => {
+      tabs.forEach(t => t.classList.remove('active'));
+      tab.classList.add('active');
+      if (panelHost) panelHost.innerHTML = panels[tab.textContent.trim()] || originalOverview;
+    }));
+  }
+
+  // Admin form and local image preview.
+  const form = document.getElementById('projectForm');
+  if (form) form.addEventListener('submit', e => {
+    e.preventDefault();
+    const status = document.getElementById('status');
+    if (status) {
+      status.textContent = '✓ Fiche enregistrée dans le prototype. Aucune source externe modifiée.';
+      status.style.background = '#dce9d4';
+    }
+  });
+
+  const newBtn = document.getElementById('newProjectBtn');
+  if (newBtn) newBtn.addEventListener('click', () => {
+    const title = document.getElementById('editorTitle');
+    if (title) title.textContent = 'Nouveau projet';
+    ['fName','fSubtitle','fId'].forEach(id => {
+      const el = document.getElementById(id);
+      if (el) el.value = '';
+    });
+  });
+
+  const cover = document.getElementById('coverInput');
+  if (cover) cover.addEventListener('change', () => {
+    const file = cover.files && cover.files[0];
+    if (!file) return;
+    const reader = new FileReader();
+    reader.onload = () => {
+      const preview = document.getElementById('coverPreview');
+      if (preview) preview.style.background = `linear-gradient(#0002,#0003),url("${reader.result}") center/cover`;
+    };
+    reader.readAsDataURL(file);
+  });
+
+  const preview = document.getElementById('previewBtn');
+  if (preview) preview.addEventListener('click', () => showView('projectDetail'));
+
+  // Guarantee the initial page remains visible.
+  const current = views.find(v => v.classList.contains('active'));
+  if (current) current.style.display = 'block';
+})();
+</script>
+
+<script>
+(()=>{
+const C={
+'Équation du Chaos':{d:'Écriture',s:'T2 · La Substitution',src:'Atelier → Chapitres',id:'EC-T2',w:22,t:40,mc:11,mw:'27 850'},
+'Le Bal des Esprits':{d:'Écriture',s:'',src:'Atelier → Chapitres',id:'WRK-00348A8695E7',w:6,t:28,mc:6,mw:'8 925'},
+'Registre Pépinière':{d:'Projets à venir',s:'Idées en maturation',src:'Registre Pépinière',txt:'17 graines · 6 semis · 6 développements · 5 boutures'},
+'La Charentaise':{d:'Podcast',s:'La Charentaise dans la Parenthèse',src:'La Charentaise',txt:'3 épisodes créés · 1 prêt'},
+'Passerelle':{d:'Outils',s:'Atelier d’écriture',src:'Journal Orée',txt:'Avancées techniques et éditoriales'}
+};
+const show=id=>{document.querySelectorAll('.view').forEach(v=>{v.classList.remove('active');v.style.display='none'});let t=document.getElementById(id);if(t){t.classList.add('active');t.style.display='block'};document.querySelectorAll('.nav button').forEach(b=>b.classList.toggle('active',b.dataset.view===id));scrollTo(0,0)};
+document.querySelectorAll('[data-view]').forEach(b=>b.addEventListener('click',e=>{e.preventDefault();e.stopImmediatePropagation();show(b.dataset.view)},true));
+function detail(name,tab='Aperçu'){let c=C[name]||{d:'Autre',s:'',src:'Journal Orée',txt:'Avancées du projet'};
+let sec=document.getElementById('projectDetail'); if(!sec)return;
+sec.querySelector('h1').textContent=name;let p=sec.querySelector('.top p');if(p)p.textContent=c.s;
+let hero=sec.querySelector('.project-hero');if(hero){hero.querySelector('h1').textContent=name;let divs=hero.querySelectorAll('div div');if(divs.length)divs[divs.length-1].textContent=c.s}
+let tabs=sec.querySelector('.tabs');let names=c.d==='Écriture'?['Aperçu','Chapitres','Journal','Statistiques']:c.d==='Podcast'?['Aperçu','Épisodes','Journal','Statistiques']:['Aperçu','Journal'];
+tabs.innerHTML=names.map(x=>`<button type="button" class="${x===tab?'active':''}">${x}</button>`).join('');
+let host=sec.querySelector('.detail-grid');if(!host){host=document.createElement('div');host.className='detail-grid';tabs.after(host)}
+if(c.d==='Écriture'){
+ if(tab==='Aperçu')host.innerHTML=`<div class="panel"><h2>Avancement global</h2><strong style="font-family:var(--serif);font-size:28px">${c.w} / ${c.t}</strong> chapitres<div class="progressbar"><span style="width:${c.w/c.t*100}%"></span></div></div><div class="panel"><h2>Septembre 2026</h2><p>Période : <strong>1er au 30 septembre</strong>.</p><p><strong>${c.mc} chapitres</strong> · <strong>${c.mw} mots</strong></p></div>`;
+ if(tab==='Chapitres')host.innerHTML=`<div class="panel" style="grid-column:1/-1"><h2>Chapitres · septembre 2026</h2><p>Tous les chapitres rédigés entre le <strong>1er et le 30 septembre</strong> sont comptabilisés.</p><div class="metrics"><div class="metric"><strong>${c.mc}</strong>ce mois</div><div class="metric"><strong>${c.w}</strong>au total</div></div></div>`;
+ if(tab==='Journal')host.innerHTML=`<div class="panel" style="grid-column:1/-1"><h2>Journal mensuel</h2><div class="month-row"><div class="month-name">Septembre 2026</div><div><span class="pill">${c.mc} chapitres</span><span class="pill">${c.mw} mots</span></div></div><h3 style="margin-top:20px">Avancées qualitatives</h3><p>Les entrées du Journal Orée du manuscrit complètent ce bilan mensuel.</p></div>`;
+ if(tab==='Statistiques')host.innerHTML=`<div class="panel" style="grid-column:1/-1"><h2>Statistiques · septembre 2026</h2><p>Photographie du mois civil : <strong>1er → 30 septembre</strong>.</p><div class="metrics"><div class="metric"><strong>${c.mc}</strong>chapitres</div><div class="metric"><strong>${c.mw}</strong>mots</div></div></div>`;
+}else if(c.d==='Podcast'){host.innerHTML=`<div class="panel" style="grid-column:1/-1"><h2>${tab}</h2><p>${c.txt}</p><p>Source : ${c.src}</p></div>`}
+else{host.innerHTML=`<div class="panel" style="grid-column:1/-1"><h2>${tab}</h2><p>${c.txt}</p><p>Source : ${c.src}</p></div>`}
+tabs.querySelectorAll('button').forEach(b=>b.onclick=()=>detail(name,b.textContent));show('projectDetail')}
+document.querySelectorAll('[data-project]').forEach(x=>x.addEventListener('click',e=>{e.preventDefault();e.stopImmediatePropagation();detail(x.dataset.project)},true));
+let fb=document.getElementById('homeFilters');if(fb)fb.querySelectorAll('button').forEach(b=>b.onclick=()=>{fb.querySelectorAll('button').forEach(x=>x.classList.remove('active'));b.classList.add('active');let f=b.dataset.filter;document.querySelectorAll('#projectCards .card').forEach(c=>c.style.display=(f==='Tous'||c.textContent.includes(f))?'block':'none')});
+document.querySelectorAll('[data-admin-project]').forEach(b=>b.onclick=()=>{let n=b.dataset.adminProject,c=C[n];document.querySelectorAll('[data-admin-project]').forEach(x=>x.classList.remove('selected'));b.classList.add('selected');document.getElementById('editorTitle').textContent=n;document.getElementById('fName').value=n;document.getElementById('fSubtitle').value=c.s||'';document.getElementById('fId').value=c.id||'';document.getElementById('coverPreview').textContent=n});
+let pv=document.getElementById('previewBtn');if(pv)pv.addEventListener('click',e=>{e.stopImmediatePropagation();detail(document.getElementById('fName').value||'Équation du Chaos')},true);
+})();
+</script>
+<script>
+(()=>{
+const DATA=[
+ {name:'Équation du Chaos',domain:'Écriture',sub:'T2 · La Substitution',value:'11 chapitres en septembre',total:'22 / 40 chapitres',words:'27 850 mots',source:'Atelier → Chapitres',
+  history:[['Septembre 2026',['11 chapitres','27 850 mots'],['Direction visuelle EC2 verrouillée','Continuité du Tome 2 avancée']],['Août 2026',['11 chapitres rédigés'],['Lancement du Tome 2']]]},
+ {name:'Le Bal des Esprits',domain:'Écriture',sub:'Gressac · concours Fyctia',value:'6 chapitres en septembre',total:'6 / 28 chapitres',words:'8 925 mots',source:'Atelier → Chapitres',
+  history:[['Septembre 2026',['6 chapitres','8 925 mots'],['Plan 28 chapitres intégré à Passerelle','Galerie personnages mise en place','Continuité visuelle du chapitre 5']]]},
+ {name:'Passerelle',domain:'Outils',sub:'Atelier d’écriture',value:'12 avancées en septembre',source:'Journal Orée',
+  history:[['Septembre 2026',['12 avancées'],['Imports œuvres et plans','Recherche C79 et synchro Atelier C80','Prélude C83-C85','C95 / C96','C101 / C102']]]},
+ {name:'Passe-ailes',domain:'Outils',sub:'Pilotage éditorial',value:'7 avancées en septembre',source:'Journal Orée',
+  history:[['Septembre 2026',['7 avancées'],['Documentation et wireframes','V1 puis V2','Persistance Supabase V4','Synchronisation Passerelle','Planification publication V8/V9','V11']]]},
+ {name:'Todum',domain:'Outils',sub:'To-do centrale',value:'Plusieurs versions en septembre',source:'Journal Orée + Todum DB',
+  history:[['Septembre 2026',['Évolution continue'],['V2 connectée','V3 / V3.1','V3.5.2.1','V3.6 Inbox vocale','V3.8.3 Types','V3.8.4 Carry On']]]},
+ {name:'Sonate',domain:'Outils',sub:'Capture d’idées',value:'Circuit stabilisé',source:'Journal Orée',
+  history:[['Septembre 2026',['2 jalons'],['Circuit Sonate → Pépinière','Dictée stabilisée / Sonate v4']]]},
+ {name:'Registre Pépinière',domain:'Projets à venir',sub:'Idées en maturation',value:'17 graines · 6 semis · 6 développements · 5 boutures',source:'Registre Pépinière',
+  history:[['Septembre 2026',['17 graines','6 semis','6 développements','5 boutures'],['Registre restructuré','Premiers projets entrés dans le circuit']]]},
+ {name:'La Charentaise',domain:'Podcast',sub:'La Charentaise dans la Parenthèse',value:'3 épisodes créés · 1 prêt',source:'Registre podcast',
+  history:[['Septembre 2026',['3 épisodes créés','1 prêt'],['Premier épisode enregistré avec intro','Identité visuelle définie','Architecture du mini-hub préparée']]]},
+ {name:'Communication',domain:'Communication',sub:'Communication transversale',value:'8 tâches terminées en septembre',source:'Todum DB · Genre = Communication',
+  history:[['Septembre 2026',['8 tâches terminées'],['Stories et posts F&H','Diffusion épisode 1 programmée','Présentation TikTok','Story publication histoires']]]},
+ {name:'Autre',domain:'Autre',sub:'Avancées transversales',value:'Traces historiques regroupées',source:'Journal Orée',
+  history:[['Septembre 2026',['Avancées diverses'],['Archives auteur','Migrations ponctuelles','Identités visuelles et organisation transversale']]]}
+];
+
+function esc(s){return String(s??'').replace(/[&<>"']/g,m=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[m]))}
+const grid=document.getElementById('oreeGrid');
+function render(filter='Tous'){
+ if(!grid)return;
+ grid.innerHTML=DATA.filter(x=>filter==='Tous'||x.domain===filter).map(x=>`
+ <article class="oree-card" data-o-name="${esc(x.name)}" data-domain="${esc(x.domain)}">
+  <div class="oree-cover">${esc(x.name)}</div>
+  <div class="oree-body"><div class="oree-head"><div><h3>${esc(x.name)}</h3><span class="oree-tag">${esc(x.domain)}</span></div></div>
+  <p>${esc(x.sub)}</p><div class="oree-value">${esc(x.value)}</div></div>
+ </article>`).join('');
+ grid.querySelectorAll('.oree-card').forEach(c=>c.onclick=()=>openDrawer(c.dataset.oName));
+}
+render();
+
+const filters=document.getElementById('oreeFilters');
+if(filters)filters.querySelectorAll('button').forEach(b=>b.onclick=()=>{filters.querySelectorAll('button').forEach(x=>x.classList.remove('active'));b.classList.add('active');render(b.dataset.oFilter)});
+
+// Hide all old grouped project sections/cards on overview, leaving the unified landscape.
+const landscape=document.getElementById('oreeLandscape');
+if(landscape){
+ const view=landscape.closest('.view');
+ if(view){
+   view.querySelectorAll('.projects,.group,.project-group,.home-filterbar').forEach(el=>{if(!landscape.contains(el))el.style.display='none'});
+   view.querySelectorAll('.section-head').forEach(el=>{if(!landscape.contains(el) && el.nextElementSibling && (el.nextElementSibling.classList.contains('projects')||el.nextElementSibling.classList.contains('group')))el.style.display='none'});
+ }
+}
+
+function drawerEl(){return document.getElementById('drawer')}
+function openDrawer(name){
+ const d=DATA.find(x=>x.name===name);if(!d)return;
+ const dr=drawerEl();if(!dr)return;
+ dr.innerHTML=`<button class="drawer-close" type="button">✕</button>
+ <div class="drawer-hero"><div><span class="drawer-tag">${esc(d.domain)}</span><h2>${esc(d.name)}</h2><div>${esc(d.sub)}</div></div></div>
+ <h3>Maintenant</h3><p>${esc(d.value)}</p>
+ ${d.domain==='Écriture'?`<div class="drawer-metrics"><div class="drawer-metric"><strong>${esc(d.total)}</strong>avancement global</div><div class="drawer-metric"><strong>${esc(d.words)}</strong>septembre</div></div>`:''}
+ <p class="source-note">Source : ${esc(d.source)}</p>
+ <div class="history"><h3>Historique</h3>
+ ${d.history.map((h,i)=>`<details ${i===0?'open':''}><summary>${esc(h[0])}</summary><div class="history-content"><div class="history-pills">${h[1].map(p=>`<span class="history-pill">${esc(p)}</span>`).join('')}</div>${h[2].map(e=>`<div class="history-entry">${esc(e)}</div>`).join('')}</div></details>`).join('')}
+ </div>`;
+ dr.classList.add('open');
+ dr.querySelector('.drawer-close').onclick=()=>dr.classList.remove('open');
+}
+
+// Archive cards now open the same kind of side panel.
+document.querySelectorAll('[data-archive]').forEach(c=>c.onclick=()=>{
+ const dr=drawerEl();if(!dr)return;
+ dr.innerHTML=`<button class="drawer-close" type="button">✕</button><h2 style="margin-top:45px">${esc(c.dataset.archive)}</h2><p>Cette archive conservera son historique mensuel, ses jalons et son bilan final lorsqu’un vrai projet terminé sera disponible.</p><div class="history"><details open><summary>Historique conservé</summary><div class="history-content">Orée garde la mémoire du chemin sans modifier la source d’origine.</div></details></div>`;
+ dr.classList.add('open');dr.querySelector('.drawer-close').onclick=()=>dr.classList.remove('open');
+});
+
+// Back office: all listed projects become clickable, including projects that were absent before.
+const admin=document.getElementById('admin');
+if(admin){
+ const list=admin.querySelector('.admin-list');
+ if(list){
+   list.querySelectorAll('[data-admin-project]').forEach(x=>x.remove());
+   const note=list.querySelector('.note');
+   DATA.filter(x=>x.domain!=='Communication'&&x.domain!=='Autre').forEach((d,i)=>{
+    const b=document.createElement('button');b.type='button';b.dataset.adminProject=d.name;
+    b.innerHTML=`${esc(d.name)}<br><small>${esc(d.domain)} · ${esc(d.source)}</small>`;
+    if(i===0)b.classList.add('selected');
+    list.insertBefore(b,note);
+   });
+   list.querySelectorAll('[data-admin-project]').forEach(b=>b.onclick=()=>{
+    const d=DATA.find(x=>x.name===b.dataset.adminProject);if(!d)return;
+    list.querySelectorAll('[data-admin-project]').forEach(x=>x.classList.remove('selected'));b.classList.add('selected');
+    const set=(id,v)=>{const e=document.getElementById(id);if(e)e.value=v||''};
+    const title=document.getElementById('editorTitle');if(title)title.textContent=d.name;
+    set('fName',d.name);set('fSubtitle',d.sub);set('fId','');
+    const prev=document.getElementById('coverPreview');if(prev)prev.textContent=d.name;
+   });
+ }
+}
+
+// Restore Journal visibility if prior prototype scripts hid rows.
+const journal=document.getElementById('journal');
+if(journal)journal.querySelectorAll('.timeline-row').forEach(r=>r.style.display='grid');
+})();
+</script>
+
+<script id="oree-v45-fixes-script">
+(()=>{
+  const adminList=document.querySelector('#admin .admin-list');
+  if(adminList){
+    // Keep heading and safety note, remove every old project button/list fragment.
+    const heading=adminList.querySelector('h2');
+    const note=adminList.querySelector('.note');
+    [...adminList.children].forEach(el=>{
+      if(el!==heading && el!==note) el.remove();
+    });
+
+    const wrap=document.createElement('div');
+    wrap.id='oreeAdminCanonical';
+    const items=[
+      ['Équation du Chaos','Écriture · Atelier → Chapitres'],
+      ['Le Bal des Esprits','Écriture · Atelier → Chapitres'],
+      ['Passerelle','Outils · Journal Orée'],
+      ['Passe-ailes','Outils · Journal Orée'],
+      ['Todum','Outils · Journal Orée + Todum DB'],
+      ['Sonate','Outils · Journal Orée'],
+      ['Registre Pépinière','Projets à venir · Registre Pépinière'],
+      ['La Charentaise','Podcast · Registre podcast']
+    ];
+    items.forEach((it,i)=>{
+      const b=document.createElement('button');
+      b.type='button';
+      b.dataset.adminProject=it[0];
+      if(i===0)b.classList.add('selected');
+      b.innerHTML=`<strong>${it[0]}</strong><br><small>${it[1]}</small>`;
+      wrap.appendChild(b);
+    });
+    if(note) adminList.insertBefore(wrap,note); else adminList.appendChild(wrap);
+
+    // Populate editor from the canonical list.
+    const data={
+      'Équation du Chaos':['T2 · La Substitution','EC-T2'],
+      'Le Bal des Esprits':['Gressac · concours Fyctia','WRK-00348A8695E7'],
+      'Passerelle':['Atelier d’écriture',''],
+      'Passe-ailes':['Pilotage éditorial',''],
+      'Todum':['To-do centrale',''],
+      'Sonate':['Capture d’idées',''],
+      'Registre Pépinière':['Idées en maturation',''],
+      'La Charentaise':['La Charentaise dans la Parenthèse','']
+    };
+    wrap.querySelectorAll('button').forEach(b=>b.addEventListener('click',()=>{
+      wrap.querySelectorAll('button').forEach(x=>x.classList.remove('selected'));
+      b.classList.add('selected');
+      const n=b.dataset.adminProject, vals=data[n]||['',''];
+      const title=document.getElementById('editorTitle'); if(title)title.textContent=n;
+      const name=document.getElementById('fName'); if(name)name.value=n;
+      const sub=document.getElementById('fSubtitle'); if(sub)sub.value=vals[0];
+      const id=document.getElementById('fId'); if(id)id.value=vals[1];
+      const preview=document.getElementById('coverPreview'); if(preview)preview.textContent=n;
+    }));
+  }
+})();
+</script>
+
+<div class="oree-modal-backdrop" id="mireModal" aria-hidden="true"><div class="oree-modal" role="dialog" aria-modal="true" aria-labelledby="mireModalTitle"><h2 id="mireModalTitle">Mettre en ligne de mire</h2><div class="context" id="mireModalContext"></div><div class="oree-form-grid"><input type="hidden" id="mireId"><input type="hidden" id="mireHorizonRef"><input type="hidden" id="mireEcosystem"><input type="hidden" id="mireProject"><label>Mois<select id="mireFormMonth"><option>Octobre 2026</option><option>Novembre 2026</option><option>Décembre 2026</option></select></label><label>Ce que je veux pousser ce mois-ci<textarea id="mireCap" placeholder="Le cap du mois, pas une liste de tâches."></textarea></label><label>Jusqu’où ?<textarea id="mireFinish" placeholder="Le repère qui dira : c’est suffisamment loin pour ce mois-ci."></textarea></label></div><div class="oree-auth-note" id="mireAuthNote">🔐 Synchronisation via la même authentification Supabase que Todum.</div><div class="oree-modal-actions"><button type="button" id="mireCancel">Annuler</button><button type="button" class="primary" id="mireSave">Enregistrer</button></div></div></div>
+<div class="oree-auth-modal" id="oreeAuthModal" aria-hidden="true"><div class="oree-auth-card"><h2>Connexion à Orée</h2><p>Utilise le même compte Supabase que Todum. Si Orée et Todum sont hébergés sur le même domaine, la session peut être reconnue automatiquement.</p><label for="oreeAuthEmail">E-mail</label><input id="oreeAuthEmail" type="email" autocomplete="email"><label for="oreeAuthPassword">Mot de passe</label><input id="oreeAuthPassword" type="password" autocomplete="current-password"><div class="oree-auth-error" id="oreeAuthError"></div><div class="oree-auth-user" id="oreeAuthUser"></div><div class="oree-auth-actions"><button id="oreeAuthCancel" type="button">Fermer</button><button id="oreeAuthLogout" type="button" style="display:none">Déconnexion</button><button class="primary" id="oreeAuthLogin" type="button">Connexion</button></div></div></div>
+<script id="oree-v5-nav">(()=>{const bs=[...document.querySelectorAll('[data-top-view]')];function open(id){document.querySelectorAll('.view').forEach(v=>{v.classList.remove('active');v.style.display='none'});const t=document.getElementById(id);if(t){t.classList.add('active');t.style.display='block'}bs.forEach(b=>b.classList.toggle('active',b.dataset.topView===id));scrollTo(0,0)}bs.forEach(b=>b.onclick=()=>open(b.dataset.topView));document.getElementById('oreeHome')?.addEventListener('click',()=>open('overview'));})();</script><script id="oree-google-sheet-connector">
+(()=>{
+  const SHEET_ID='1ByEf5vAnj-iwZga2VE6bsa_og0S-yOxL8jggrFMTqYI';
+  const OREE_CONFIG={
+    appsScriptUrl:'https://script.google.com/macros/s/AKfycbzA1w0y-UcDCXlkjrTwoQTIgQ1mtGJbYbCvQ1fzSEOjRmhyKi7JfcYP8oQ9_Q5S8VRnXA/exec',
+    supabaseUrl:'https://uvlzrfxecmaugdfuhjho.supabase.co',
+    supabaseAnonKey:'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InV2bHpyZnhlY21hdWdkZnVoamhvIiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODg1OTA5NjMsImV4cCI6MjEwNDE2Njk2M30.RXYM5ZDpFcf_mFoon9UglTyXe_Iqoy9ljQUNu2cPr-s'
+  };
+  const FALLBACK_HORIZON=[
+    ['T4 2026','Écriture','Équation du Chaos T2','Écriture','Terminer le manuscrit','Avancer le manuscrit selon l’Atelier','Manuscrit terminé','En cours'],
+    ['T4 2026','Écriture','Le Bal des Esprits','Écriture','Terminer le manuscrit','Poursuivre le manuscrit selon l’Atelier','Manuscrit terminé','En cours'],
+    ['T4 2026','Orée','Orée','Projet','Finaliser la V1','Pilotage + design + Ligne d’horizon','V1 utilisable et stable','En cours'],
+    ['T4 2026','Eternal Heaven','Hall','Projet','Lancer le socle d’Eternal Heaven','Cadrer et construire la première brique du Hall','Hall suffisamment opérationnel pour servir de socle','En cours'],
+    ['T4 2026','Passe-Ailes','Communication','Projet','Atteindre le palier utile maintenant','Génération des pages + périmètre Communication','Pages générées et Communication complète','En cours'],
+    ['T4 2026','La Charentaise dans la parenthèse','Podcast','Run','Publier les trois épisodes déjà enregistrés','Lancer la diffusion sans reconstruire le système','3 épisodes publiés','À venir']
+  ];
+  let supa=null, mireRows=[], horizonRows=FALLBACK_HORIZON;
+  const esc=v=>String(v??'').replace(/[&<>\"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
+  const MONTHS_FR=['janvier','février','mars','avril','mai','juin','juillet','août','septembre','octobre','novembre','décembre'];
+  function currentMonthLabel(){const d=new Date();return MONTHS_FR[d.getMonth()].charAt(0).toUpperCase()+MONTHS_FR[d.getMonth()].slice(1)+' '+d.getFullYear()}
+  function ensureClient(){if(supa)return supa;if(!window.supabase)throw new Error('Supabase indisponible');supa=window.supabase.createClient(OREE_CONFIG.supabaseUrl,OREE_CONFIG.supabaseAnonKey,{auth:{persistSession:true,autoRefreshToken:true,detectSessionInUrl:true}});return supa}
+  async function refreshAuthUI(){try{const c=ensureClient();const {data:{session}}=await c.auth.getSession();const btn=document.getElementById('oreeAuthBtn');const login=document.getElementById('oreeAuthLogin');const logout=document.getElementById('oreeAuthLogout');const user=document.getElementById('oreeAuthUser');if(session){btn.textContent='Connectée ✓';btn.classList.add('connected');if(login)login.style.display='none';if(logout)logout.style.display='inline-block';if(user)user.textContent=session.user?.email||'Session Supabase active';}else{btn.textContent='Connexion';btn.classList.remove('connected');if(login)login.style.display='inline-block';if(logout)logout.style.display='none';if(user)user.textContent='';}}catch(e){console.warn(e)}}
+  function setAuthModal(open){const m=document.getElementById('oreeAuthModal');if(!m)return;m.classList.toggle('open',open);m.setAttribute('aria-hidden',open?'false':'true');if(open)refreshAuthUI()}
+  async function loginOree(){const err=document.getElementById('oreeAuthError');err.textContent='';const email=document.getElementById('oreeAuthEmail').value.trim();const password=document.getElementById('oreeAuthPassword').value;if(!email||!password){err.textContent='Renseigne ton e-mail et ton mot de passe.';return}try{const c=ensureClient();const {error}=await c.auth.signInWithPassword({email,password});if(error)throw error;await refreshAuthUI();setAuthModal(false);await refreshMire()}catch(e){err.textContent=e.message||'Connexion impossible.'}}
+  async function logoutOree(){try{await ensureClient().auth.signOut();await refreshAuthUI();setAuthModal(false);renderMire([],false)}catch(e){document.getElementById('oreeAuthError').textContent=e.message||'Déconnexion impossible.'}}
+  async function authToken(){const c=ensureClient();const {data:{session}}=await c.auth.getSession();if(!session?.access_token)throw new Error('Connexion Supabase requise. Clique sur « Connexion » en haut à droite.');return session.access_token}
+  function apiReady(){return OREE_CONFIG.appsScriptUrl && !OREE_CONFIG.appsScriptUrl.startsWith('PASTE_')}
+  async function api(body){if(!apiReady())throw new Error('Le Web App Apps Script Orée n’est pas encore renseigné.');const token=await authToken();const res=await fetch(OREE_CONFIG.appsScriptUrl,{method:'POST',body:JSON.stringify({...body,token}),cache:'no-store'});if(!res.ok)throw new Error(`HTTP ${res.status}`);const data=await res.json();if(!data?.ok && data?.error)throw new Error(data.error);return data}
+  function gvizRows(payload){if(!payload||payload.status==='error'||!payload.table)throw new Error('Réponse Google Sheets indisponible');return payload.table.rows.map(r=>(r.c||[]).map(c=>c?(c.f??c.v??''):'')).filter(r=>r.some(Boolean))}
+  function loadSheet(sheet,callback,timeout=7000){return new Promise((resolve,reject)=>{const cb='oree_'+callback+'_'+Date.now();let done=false;const script=document.createElement('script');const finish=(fn,val)=>{if(done)return;done=true;clearTimeout(timer);try{delete window[cb]}catch(e){};script.remove();fn(val)};window[cb]=data=>{try{finish(resolve,gvizRows(data))}catch(e){finish(reject,e)}};script.onerror=()=>finish(reject,new Error('Connexion Google Sheets impossible'));script.src=`https://docs.google.com/spreadsheets/d/${SHEET_ID}/gviz/tq?tqx=responseHandler:${cb}&sheet=${encodeURIComponent(sheet)}&headers=1`;document.head.appendChild(script);const timer=setTimeout(()=>finish(reject,new Error('Délai dépassé')),timeout)})}
+  function horizonRef(r){return [r[0],r[1],r[2]].map(x=>String(x||'').trim().toLowerCase().replace(/[^a-z0-9à-ÿ]+/gi,'-').replace(/^-|-$/g,'')).join('|')}
+  function renderHorizon(rows,live){horizonRows=rows||[];const period=document.getElementById('horizonPeriod')?.value||'T4 2026';const list=horizonRows.filter(r=>String(r[0]).trim()===period);const grid=document.getElementById('horizonGrid');if(!grid)return;grid.innerHTML=list.map(r=>{const [per,parent,name,nature,cap,wave,finish,state]=r;const dim=state==='À venir'||state==='Pause';const ref=horizonRef(r);return `<article class="horizon-card${dim?' dim':''}" data-nature="${esc(nature)}"><span class="horizon-state ${state==='En cours'?'on':''}">${esc(state)}</span><div class="horizon-parent">${esc(parent)}</div><h3>${esc(name)}</h3><span class="horizon-type">${esc(nature)}</span><div class="horizon-cap">${esc(cap)}</div><div class="wave"><small>Vague actuelle</small><p>${esc(wave)}</p></div><div class="finish"><small>Ligne d’arrivée</small><p>${esc(finish)}</p></div><div class="horizon-actions"><button class="mire-add-btn" data-ref="${esc(ref)}" type="button">＋ Mettre en ligne de mire</button></div></article>`}).join('')||'<div class="empty">Aucun front renseigné pour cette période.</div>';grid.querySelectorAll('.mire-add-btn').forEach(b=>b.addEventListener('click',()=>openMireForHorizon(b.dataset.ref)));const n=list.length;document.getElementById('horizonSubtitle').textContent=`${n} front${n>1?'s':''} inscrit${n>1?'s':''} dans l’Horizon.`;document.getElementById('horizonQuarter').textContent=period;const src=document.getElementById('horizonSource');if(src){src.textContent=live?'● Synchronisé avec « Ligne d’horizon »':'◌ Aperçu local';src.style.color=live?'#55745f':''}}
+  function normalizeMire(o){if(Array.isArray(o)){return {id:o[0]||'',month:o[1]||'',horizonRef:o[2]||'',ecosystem:o[3]||'',project:o[4]||'',cap:o[5]||'',finish:o[6]||'',done:o[7]===true||String(o[7]).toLowerCase()==='true'}}return {id:o['ID Mire']||o.id||'',month:o['Mois']||o.month||'',horizonRef:o['Référence Horizon']||o.horizonRef||'',ecosystem:o['Écosystème']||o.ecosystem||'',project:o['Projet / sous-projet']||o.project||'',cap:o['Cap du mois']||o.cap||'',finish:o["Repère d'arrivée"]||o.finish||'',done:o['Atteint']===true||String(o['Atteint']??o.done).toLowerCase()==='true'}}
+  function renderMire(rows,live=true){mireRows=(rows||[]).map(normalizeMire);const month=document.getElementById('mireMonth')?.value||currentMonthLabel();const list=mireRows.filter(x=>x.month===month);const grid=document.getElementById('mireGrid');if(!grid)return;grid.innerHTML=list.map(x=>`<article class="mire-card${x.done?' done':''}"><span class="mire-state ${x.done?'on':''}">${x.done?'Atteint':'En cours'}</span><div class="mire-parent">${esc(x.ecosystem)}</div><h3>${esc(x.project)}</h3><div class="mire-focus">${esc(x.cap)}</div><div class="mire-finish"><small>Repère d’arrivée du mois</small><p>${esc(x.finish)}</p></div><label class="mire-check"><input type="checkbox" data-mire-check="${esc(x.id)}" ${x.done?'checked':''}> Repère atteint</label><div class="mire-card-actions"><button class="mire-edit-btn" data-mire-edit="${esc(x.id)}" type="button">Modifier</button></div></article>`).join('')||`<div class="mire-empty">Aucune ligne de mire renseignée pour ${esc(month)}. Le mois peut rester volontairement léger.</div>`;grid.querySelectorAll('[data-mire-check]').forEach(el=>el.addEventListener('change',()=>toggleMire(el.dataset.mireCheck,el.checked,el)));grid.querySelectorAll('[data-mire-edit]').forEach(el=>el.addEventListener('click',()=>openMireEdit(el.dataset.mireEdit)));const src=document.getElementById('mireSource');if(src){src.textContent=apiReady()?(live?'● Synchronisé via Apps Script Orée':'◌ Connexion à vérifier'):'◌ Apps Script Orée à déployer';src.style.color=live&&apiReady()?'#55745f':''}}
+  async function refreshMire(){if(apiReady()){try{const data=await api({action:'mireList'});renderMire(data.items||[],true);return}catch(e){console.warn(e)}}try{const rows=await loadSheet('Ligne de mire','mireFallback');renderMire(rows,true)}catch(e){renderMire([],false)}}
+  function setModal(open){const m=document.getElementById('mireModal');m.classList.toggle('open',open);m.setAttribute('aria-hidden',open?'false':'true')}
+  function openMireForHorizon(ref){const r=horizonRows.find(x=>horizonRef(x)===ref);if(!r)return;document.getElementById('mireId').value='';document.getElementById('mireHorizonRef').value=ref;document.getElementById('mireEcosystem').value=r[1]||'';document.getElementById('mireProject').value=r[2]||'';document.getElementById('mireFormMonth').value=document.getElementById('mireMonth')?.value||currentMonthLabel();document.getElementById('mireCap').value='';document.getElementById('mireFinish').value='';document.getElementById('mireModalTitle').textContent='Mettre en ligne de mire';document.getElementById('mireModalContext').textContent=`${r[2]} · Cap trimestriel : ${r[4]} · Ligne d’arrivée : ${r[6]}`;setModal(true)}
+  function openMireEdit(id){const x=mireRows.find(y=>y.id===id);if(!x)return;document.getElementById('mireId').value=x.id;document.getElementById('mireHorizonRef').value=x.horizonRef;document.getElementById('mireEcosystem').value=x.ecosystem;document.getElementById('mireProject').value=x.project;document.getElementById('mireFormMonth').value=x.month;document.getElementById('mireCap').value=x.cap;document.getElementById('mireFinish').value=x.finish;document.getElementById('mireModalTitle').textContent='Modifier la ligne de mire';document.getElementById('mireModalContext').textContent=x.project;setModal(true)}
+  async function saveMire(){const btn=document.getElementById('mireSave');btn.disabled=true;const item={id:document.getElementById('mireId').value,month:document.getElementById('mireFormMonth').value,horizonRef:document.getElementById('mireHorizonRef').value,ecosystem:document.getElementById('mireEcosystem').value,project:document.getElementById('mireProject').value,cap:document.getElementById('mireCap').value.trim(),finish:document.getElementById('mireFinish').value.trim()};if(!item.cap||!item.finish){alert('Renseigne le cap du mois et le repère d’arrivée.');btn.disabled=false;return}try{const action=item.id?'mireUpdate':'mireCreate';await api({action,item});setModal(false);document.getElementById('mireMonth').value=item.month;await refreshMire()}catch(e){alert(e.message)}finally{btn.disabled=false}}
+  async function toggleMire(id,done,el){el.disabled=true;try{await api({action:done?'mireComplete':'mireReactivate',id});await refreshMire()}catch(e){el.checked=!done;alert(e.message)}finally{el.disabled=false}}
+  function normaliseDate(v){if(v instanceof Date)return v.toLocaleDateString('fr-FR');const s=String(v||'');const m=s.match(/^Date\((\d+),(\d+),(\d+)\)$/);if(m)return new Date(+m[1],+m[2],+m[3]).toLocaleDateString('fr-FR');return s}
+  function shortDate(v){const s=normaliseDate(v),p=s.split('/');if(p.length===3){const m=['janv.','févr.','mars','avr.','mai','juin','juil.','août','sept.','oct.','nov.','déc.'];return `${parseInt(p[0],10)} ${m[parseInt(p[1],10)-1]}`}return s}
+  function setCurrentMonthUI(){const label=currentMonthLabel();for(const id of ['period','mireMonth','mireFormMonth']){const sel=document.getElementById(id);if(sel){let o=[...sel.options].find(x=>x.textContent===label);if(!o){o=new Option(label,label);sel.insertBefore(o,sel.firstChild)}sel.value=label}}const lower=label.split(' ')[0].toLowerCase();const wl=document.getElementById('homeWordsLabel');if(wl)wl.textContent='mots écrits en '+lower;const jl=document.getElementById('homeJournalLabel');if(jl)jl.textContent='avancées en '+lower}
+  function renderJournal(rows){window.oreeJournalRows=rows.map(r=>[shortDate(r[0]),r[1]||'',r[2]||'',r[3]||'','Journal']);const target=document.getElementById('journalEvents');if(target)target.innerHTML=window.oreeJournalRows.map(eventHTML).join('');const now=new Date(),cm=now.getMonth()+1,cy=now.getFullYear();const monthRows=rows.filter(r=>{const p=String(normaliseDate(r[0])).split('/');return p.length===3&&Number(p[1])===cm&&Number(p[2])===cy});const hc=document.getElementById('homeJournalCount');if(hc)hc.textContent=monthRows.length;const hd=document.getElementById('homeDomainCount');if(hd)hd.textContent=new Set(monthRows.map(r=>r[1]).filter(Boolean)).size}
+  setCurrentMonthUI();renderHorizon(FALLBACK_HORIZON,false);loadSheet("Ligne d'horizon",'horizon').then(r=>renderHorizon(r,true)).catch(()=>{});loadSheet('Journal','journal').then(renderJournal).catch(()=>{});refreshMire();
+  document.getElementById('mireMonth')?.addEventListener('change',()=>renderMire(mireRows,true));document.getElementById('horizonPeriod')?.addEventListener('change',()=>renderHorizon(horizonRows,true));document.getElementById('mireCancel')?.addEventListener('click',()=>setModal(false));document.getElementById('mireSave')?.addEventListener('click',saveMire);document.getElementById('mireModal')?.addEventListener('click',e=>{if(e.target.id==='mireModal')setModal(false)});
+  document.getElementById('oreeAuthBtn')?.addEventListener('click',()=>setAuthModal(true));document.getElementById('oreeAuthCancel')?.addEventListener('click',()=>setAuthModal(false));document.getElementById('oreeAuthLogin')?.addEventListener('click',loginOree);document.getElementById('oreeAuthLogout')?.addEventListener('click',logoutOree);document.getElementById('oreeAuthPassword')?.addEventListener('keydown',e=>{if(e.key==='Enter')loginOree()});document.getElementById('oreeAuthModal')?.addEventListener('click',e=>{if(e.target.id==='oreeAuthModal')setAuthModal(false)});ensureClient().auth.onAuthStateChange(()=>refreshAuthUI());refreshAuthUI();
+})();
+</script></body></html>
