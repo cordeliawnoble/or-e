@@ -870,7 +870,11 @@ body{background:var(--oree-parchment)!important;background-image:none!important}
 #overview .oree-kpi small { margin-top:2px !important; }
 @media(max-width:650px) { #overview .oree-kpi {min-height:0 !important;} #overview .oree-kpi-art {height:175px !important;} }
 </style>
-</head><body><header class="oree-topbar"><div class="oree-topbar-inner"><button class="oree-brand" id="oreeHome" type="button" aria-label="Accueil Orée" style="border:0;background:transparent;text-align:left;padding:0;cursor:pointer"><div class="oree-brand-name">ORÉE</div></button><nav class="oree-topnav"><button data-top-view="horizon"><span class="oree-menu-icon" aria-hidden="true">◈</span> Horizon</button><button data-top-view="mire"><span class="oree-menu-icon" aria-hidden="true">⌖</span> Ligne de mire</button><button data-top-view="archives"><span class="oree-menu-icon" aria-hidden="true">▤</span> Archives</button><button class="admin-nav" data-top-view="admin"><span class="oree-menu-icon" aria-hidden="true">⚙</span> Atelier d’Orée</button><button class="oree-auth-btn" id="oreeAuthBtn" type="button">Connexion</button></nav></div></header><div class='app'>
+<style>
+.oree-sync-badge{font-size:10px;color:#65746b;background:#f6f5ee;border:1px solid #e3dfd2;border-radius:999px;padding:7px 10px;white-space:nowrap}
+.oree-sync-badge[data-state="loading"]{color:#806c45}.oree-sync-badge[data-state="error"]{color:#a15d55}
+@media(max-width:750px){.oree-sync-badge{font-size:9px;padding:5px 7px}}
+</style></head><body><header class="oree-topbar"><div class="oree-topbar-inner"><button class="oree-brand" id="oreeHome" type="button" aria-label="Accueil Orée" style="border:0;background:transparent;text-align:left;padding:0;cursor:pointer"><div class="oree-brand-name">ORÉE</div></button><nav class="oree-topnav"><button data-top-view="horizon"><span class="oree-menu-icon" aria-hidden="true">◈</span> Horizon</button><button data-top-view="mire"><span class="oree-menu-icon" aria-hidden="true">⌖</span> Ligne de mire</button><button data-top-view="archives"><span class="oree-menu-icon" aria-hidden="true">▤</span> Archives</button><button class="admin-nav" data-top-view="admin"><span class="oree-menu-icon" aria-hidden="true">⚙</span> Atelier d’Orée</button><span id="oreeSyncBadge" class="oree-sync-badge" role="status" aria-live="polite">◌ En attente</span><button class="oree-auth-btn" id="oreeAuthBtn" type="button">Connexion</button></nav></div></header><div class='app'>
 
 <main class='main'>
 <section id='overview' class='view active'><div class='top'><div><h1>Bonjour Cordélia ! ♡</h1><p></p></div><div class='period'><select id='period'><option>Octobre 2026</option><option>Septembre 2026</option><option>Août 2026</option><option>Cette année</option></select></div></div>
@@ -1437,7 +1441,7 @@ if(journal)journal.querySelectorAll('.timeline-row').forEach(r=>r.style.display=
 })();
 </script>
 
-<script id="oree-v5-nav">(()=>{const bs=[...document.querySelectorAll('[data-top-view]')];function open(id){document.querySelectorAll('.view').forEach(v=>{v.classList.remove('active');v.style.display='none'});const t=document.getElementById(id);if(t){t.classList.add('active');t.style.display='block'}bs.forEach(b=>b.classList.toggle('active',b.dataset.topView===id));scrollTo(0,0)}bs.forEach(b=>b.onclick=()=>open(b.dataset.topView));document.getElementById('oreeHome')?.addEventListener('click',()=>open('overview'));})();</script><script id="oree-google-sheet-connector">
+<script id="oree-v5-nav">(()=>{const bs=[...document.querySelectorAll('[data-top-view]')];function open(id){document.querySelectorAll('.view').forEach(v=>{v.classList.remove('active');v.style.display='none'});const t=document.getElementById(id);if(t){t.classList.add('active');t.style.display='block'}bs.forEach(b=>b.classList.toggle('active',b.dataset.topView===id));scrollTo(0,0)}bs.forEach(b=>b.onclick=()=>{const id=b.dataset.topView;open(id);if(id==='horizon')window.oreeRefreshHorizon?.();if(id==='mire')window.oreeRefreshMire?.()});document.getElementById('oreeHome')?.addEventListener('click',()=>open('overview'));})();</script><script id="oree-google-sheet-connector">
 (()=>{
   const SHEET_ID='1ByEf5vAnj-iwZga2VE6bsa_og0S-yOxL8jggrFMTqYI';
   const OREE_CONFIG={
@@ -1455,6 +1459,18 @@ if(journal)journal.querySelectorAll('.timeline-row').forEach(r=>r.style.display=
     ['T4 2026','La Charentaise dans la parenthèse','Podcast','Run','Publier les trois épisodes déjà enregistrés','Lancer la diffusion sans reconstruire le système','3 épisodes publiés','À venir']
   ];
   let supa=null, mireRows=[], horizonRows=FALLBACK_HORIZON;
+  const syncState={horizon:'idle',mire:'idle'};
+  let horizonRequest=0,mireRequest=0,horizonLive=false,mireLive=false;
+  function syncBadge(){
+    const el=document.getElementById('oreeSyncBadge');if(!el)return;
+    const states=Object.values(syncState);
+    const loading=states.some(x=>x==='loading'),bad=states.some(x=>x==='error');
+    el.dataset.state=loading?'loading':bad?'error':'ready';
+    el.textContent=loading?'◌ Synchronisation…':bad?'⚠ Données à vérifier':states.every(x=>x==='ok')?'✓ Horizon et Mire à jour':'◌ En attente';
+    el.title=`Horizon : ${syncState.horizon} · Ligne de mire : ${syncState.mire}`;
+  }
+  function setSync(name,state){syncState[name]=state;syncBadge()}
+
   const esc=v=>String(v??'').replace(/[&<>\"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
   const MONTHS_FR=['janvier','février','mars','avril','mai','juin','juillet','août','septembre','octobre','novembre','décembre'];
   function currentMonthLabel(){const d=new Date();return MONTHS_FR[d.getMonth()].charAt(0).toUpperCase()+MONTHS_FR[d.getMonth()].slice(1)+' '+d.getFullYear()}
@@ -1477,7 +1493,7 @@ if(journal)journal.querySelectorAll('.timeline-row').forEach(r=>r.style.display=
       await refreshAuthUI();
       setAuthModal(false);
       // Les données se rechargent APRES la connexion et ne peuvent plus faire échouer l'auth.
-      setTimeout(()=>refreshMire().catch(e=>console.warn('Mire après connexion:',e)),50);
+      setTimeout(()=>{refreshMire().catch(console.warn);refreshHorizon().catch(console.warn)},50);
       setTimeout(()=>window.oreeRefreshJournal?.().catch?.(e=>console.warn('Journal après connexion:',e)),100);
     }catch(e){
       console.error('Connexion Orée:',e);
@@ -1530,7 +1546,7 @@ if(journal)journal.querySelectorAll('.timeline-row').forEach(r=>r.style.display=
     }).join('');
   }
   function renderHorizon(rows,live){
-    horizonRows=rows||[];
+    horizonRows=rows||[];horizonLive=!!live;
     window.__oreeHorizonLive=horizonRows;
     const period=document.getElementById('horizonPeriod')?.value||'T4 2026';
     const list=horizonRows.filter(r=>String(r[0]).trim()===period);
@@ -1586,9 +1602,27 @@ if(journal)journal.querySelectorAll('.timeline-row').forEach(r=>r.style.display=
     if(src){src.textContent=live?'● Synchronisé avec « Ligne d’horizon »':'◌ Aperçu local';src.style.color=live?'#55745f':''}
   }
   function normalizeMire(o){if(Array.isArray(o)){return {id:o[0]||'',month:o[1]||'',horizonRef:o[2]||'',ecosystem:o[3]||'',project:o[4]||'',cap:o[5]||'',finish:o[6]||'',done:o[7]===true||String(o[7]).toLowerCase()==='true'}}return {id:o['ID Mire']||o.id||'',month:o['Mois']||o.month||'',horizonRef:o['Référence Horizon']||o.horizonRef||'',ecosystem:o['Écosystème']||o.ecosystem||'',project:o['Projet / sous-projet']||o.project||'',cap:o['Cap du mois']||o.cap||'',finish:o["Repère d'arrivée"]||o.finish||'',done:o['Atteint']===true||String(o['Atteint']??o.done).toLowerCase()==='true'}}
-  function renderMire(rows,live=true){mireRows=(rows||[]).map(normalizeMire);const month=document.getElementById('mireMonth')?.value||currentMonthLabel();const list=mireRows.filter(x=>x.month===month);const grid=document.getElementById('mireGrid');if(!grid)return;const visuals=window.__oreeProjectVisuals||[];const mireAccent=x=>{const norm=v=>String(v||'').trim().toLowerCase();const p=visuals.find(v=>norm(v['Écosystème'])===norm(x.ecosystem)&&norm(v['Projet / sous-projet'])===norm(x.project));const c=String(p?.['Couleur accent']||'');return /^#[0-9a-fA-F]{3,8}$/.test(c)?c:'#7a927c'};grid.innerHTML=list.map(x=>`<article class="mire-card${x.done?' done':''}" style="--project-accent:${mireAccent(x)}"><span class="mire-state ${x.done?'on':''}">${x.done?'Atteint':'En cours'}</span><div class="mire-parent">${esc(x.ecosystem)}</div><h3>${esc(x.project)}</h3><div class="mire-focus">${esc(x.cap)}</div><div class="mire-finish"><small>Repère d’arrivée du mois</small><p>${esc(x.finish)}</p></div><label class="mire-check"><input type="checkbox" data-mire-check="${esc(x.id)}" ${x.done?'checked':''}> Repère atteint</label><div class="mire-card-actions"><button class="mire-edit-btn" data-mire-edit="${esc(x.id)}" type="button">Modifier</button></div></article>`).join('')||`<div class="mire-empty">Aucune ligne de mire renseignée pour ${esc(month)}. Le mois peut rester volontairement léger.</div>`;grid.querySelectorAll('[data-mire-check]').forEach(el=>el.addEventListener('change',()=>toggleMire(el.dataset.mireCheck,el.checked,el)));grid.querySelectorAll('[data-mire-edit]').forEach(el=>el.addEventListener('click',()=>openMireEdit(el.dataset.mireEdit)));const src=document.getElementById('mireSource');if(src){src.textContent=apiReady()?(live?'● Synchronisé via Apps Script Orée':'◌ Connexion à vérifier'):'◌ Apps Script Orée à déployer';src.style.color=live&&apiReady()?'#55745f':''}}
+  function renderMire(rows,live=true){mireLive=!!live;mireRows=(rows||[]).map(normalizeMire);const month=document.getElementById('mireMonth')?.value||currentMonthLabel();const list=mireRows.filter(x=>x.month===month);const grid=document.getElementById('mireGrid');if(!grid)return;const visuals=window.__oreeProjectVisuals||[];const mireAccent=x=>{const norm=v=>String(v||'').trim().toLowerCase();const p=visuals.find(v=>norm(v['Écosystème'])===norm(x.ecosystem)&&norm(v['Projet / sous-projet'])===norm(x.project));const c=String(p?.['Couleur accent']||'');return /^#[0-9a-fA-F]{3,8}$/.test(c)?c:'#7a927c'};grid.innerHTML=list.map(x=>`<article class="mire-card${x.done?' done':''}" style="--project-accent:${mireAccent(x)}"><span class="mire-state ${x.done?'on':''}">${x.done?'Atteint':'En cours'}</span><div class="mire-parent">${esc(x.ecosystem)}</div><h3>${esc(x.project)}</h3><div class="mire-focus">${esc(x.cap)}</div><div class="mire-finish"><small>Repère d’arrivée du mois</small><p>${esc(x.finish)}</p></div><label class="mire-check"><input type="checkbox" data-mire-check="${esc(x.id)}" ${x.done?'checked':''}> Repère atteint</label><div class="mire-card-actions"><button class="mire-edit-btn" data-mire-edit="${esc(x.id)}" type="button">Modifier</button></div></article>`).join('')||`<div class="mire-empty">Aucune ligne de mire renseignée pour ${esc(month)}. Le mois peut rester volontairement léger.</div>`;grid.querySelectorAll('[data-mire-check]').forEach(el=>el.addEventListener('change',()=>toggleMire(el.dataset.mireCheck,el.checked,el)));grid.querySelectorAll('[data-mire-edit]').forEach(el=>el.addEventListener('click',()=>openMireEdit(el.dataset.mireEdit)));const src=document.getElementById('mireSource');if(src){src.textContent=apiReady()?(live?'● Synchronisé via Apps Script Orée':'◌ Connexion à vérifier'):'◌ Apps Script Orée à déployer';src.style.color=live&&apiReady()?'#55745f':''}}
   window.oreeRecolorMire=()=>renderMire(mireRows,true);
-  async function refreshMire(){if(apiReady()){try{const data=await api({action:'mireList'});renderMire(data.items||[],true);return}catch(e){console.warn(e)}}try{const rows=await loadSheet('Ligne de mire','mireFallback');renderMire(rows,true)}catch(e){renderMire([],false)}}
+  async function refreshMire(){
+    const seq=++mireRequest;setSync('mire','loading');
+    const source=document.getElementById('mireSource');if(source)source.textContent='◌ Chargement de Ligne de mire…';
+    try{
+      let rows;
+      if(apiReady()){
+        try{const data=await api({action:'mireList'});if(!Array.isArray(data.items))throw new Error('Format Ligne de mire invalide');rows=data.items}
+        catch(e){console.warn('Mire API:',e);rows=await loadSheet('Ligne de mire','mireFallback',12000)}
+      }else rows=await loadSheet('Ligne de mire','mireFallback',12000);
+      if(seq!==mireRequest)return;
+      renderMire(rows,true);setSync('mire','ok');
+    }catch(e){
+      console.warn('Mire sync:',e);if(seq!==mireRequest)return;
+      // Keep the last successfully displayed data; never erase it on a network failure.
+      if(!mireLive)renderMire([],false);
+      if(source)source.textContent='⚠ Ligne de mire non actualisée · Réessayer depuis le menu';
+      setSync('mire','error');
+    }
+  }
   function setModal(open){const m=document.getElementById('mireModal');m.classList.toggle('open',open);m.setAttribute('aria-hidden',open?'false':'true')}
   function openMireForHorizon(ref){const r=horizonRows.find(x=>horizonRef(x)===ref);if(!r)return;document.getElementById('mireId').value='';document.getElementById('mireHorizonRef').value=ref;document.getElementById('mireEcosystem').value=r[1]||'';document.getElementById('mireProject').value=r[2]||'';document.getElementById('mireFormMonth').value=document.getElementById('mireMonth')?.value||currentMonthLabel();document.getElementById('mireCap').value='';document.getElementById('mireFinish').value='';document.getElementById('mireModalTitle').textContent='Mettre en ligne de mire';document.getElementById('mireModalContext').textContent=`${r[2]} · Cap trimestriel : ${r[4]} · Jalons : ${r[6]}`;setModal(true)}
   function openMireEdit(id){const x=mireRows.find(y=>y.id===id);if(!x)return;document.getElementById('mireId').value=x.id;document.getElementById('mireHorizonRef').value=x.horizonRef;document.getElementById('mireEcosystem').value=x.ecosystem;document.getElementById('mireProject').value=x.project;document.getElementById('mireFormMonth').value=x.month;document.getElementById('mireCap').value=x.cap;document.getElementById('mireFinish').value=x.finish;document.getElementById('mireModalTitle').textContent='Modifier la ligne de mire';document.getElementById('mireModalContext').textContent=x.project;setModal(true)}
@@ -1606,25 +1640,28 @@ if(journal)journal.querySelectorAll('.timeline-row').forEach(r=>r.style.display=
     if(typeof render==='function')render(activeOverviewFilter);
   }
   async function refreshHorizon(){
-    if(apiReady()){
-      try{
-        const data=await api({action:'horizonList'});
-        renderHorizon(data.items||[],true);
-        return;
-      }catch(e){ console.warn('Horizon API:',e); }
-    }
+    const seq=++horizonRequest;setSync('horizon','loading');
+    const source=document.getElementById('horizonSource');if(source)source.textContent='◌ Chargement de Ligne d’horizon…';
     try{
-      const rows=await loadSheet("Ligne d'horizon",'horizonFallback');
-      renderHorizon(rows,true);
+      let rows;
+      if(apiReady()){
+        try{const data=await api({action:'horizonList'});if(!Array.isArray(data.items))throw new Error('Format Horizon invalide');rows=data.items}
+        catch(e){console.warn('Horizon API:',e);rows=await loadSheet("Ligne d'horizon",'horizonFallback',12000)}
+      }else rows=await loadSheet("Ligne d'horizon",'horizonFallback',12000);
+      if(seq!==horizonRequest)return;
+      renderHorizon(rows,true);setSync('horizon','ok');
     }catch(e){
-      renderHorizon(FALLBACK_HORIZON,false);
+      console.warn('Horizon sync:',e);if(seq!==horizonRequest)return;
+      if(!horizonLive)renderHorizon(FALLBACK_HORIZON,false);
+      if(source)source.textContent='⚠ Horizon non actualisé · Réessayer depuis le menu';
+      setSync('horizon','error');
     }
   }
   setCurrentMonthUI();
   renderHorizon(FALLBACK_HORIZON,false);
   // V11.10: aucun appel Apps Script ici.
   // Le chargement live est centralisé après validation de la session Supabase.
-  document.getElementById('mireMonth')?.addEventListener('change',()=>renderMire(mireRows,true));document.getElementById('horizonPeriod')?.addEventListener('change',()=>renderHorizon(horizonRows,true));document.getElementById('mireCancel')?.addEventListener('click',()=>setModal(false));document.getElementById('mireSave')?.addEventListener('click',saveMire);document.getElementById('mireModal')?.addEventListener('click',e=>{if(e.target.id==='mireModal')setModal(false)});
+  document.getElementById('mireMonth')?.addEventListener('change',()=>renderMire(mireRows,mireLive));document.getElementById('horizonPeriod')?.addEventListener('change',()=>renderHorizon(horizonRows,horizonLive));document.getElementById('mireCancel')?.addEventListener('click',()=>setModal(false));document.getElementById('mireSave')?.addEventListener('click',saveMire);document.getElementById('mireModal')?.addEventListener('click',e=>{if(e.target.id==='mireModal')setModal(false)});
   document.getElementById('oreeAuthBtn')?.addEventListener('click',()=>setAuthModal(true));document.getElementById('oreeAuthCancel')?.addEventListener('click',()=>setAuthModal(false));document.getElementById('oreeAuthLogin')?.addEventListener('click',loginOree);document.getElementById('oreeAuthLogout')?.addEventListener('click',logoutOree);document.getElementById('oreeAuthPassword')?.addEventListener('keydown',e=>{if(e.key==='Enter')loginOree()});document.getElementById('oreeAuthModal')?.addEventListener('click',e=>{if(e.target.id==='oreeAuthModal')setAuthModal(false)});
   // Pont public minimal pour les modules Orée chargés après ce connecteur.
   window.oreeApi = api;
