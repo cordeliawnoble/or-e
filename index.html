@@ -1512,17 +1512,34 @@ if(journal)journal.querySelectorAll('.timeline-row').forEach(r=>r.style.display=
   window.oreeApiReady = apiReady;
   // Horizon a été déplacé hors d’Orée; aucun point d’entrée exposé.
   // Ligne de mire a été déplacée hors d’Orée; aucun point d’entrée exposé.
+  let journalRequest=null;
+  function journalStatus(message,failed=false){
+    const el=document.getElementById('homeDataStatus');
+    if(!el)return;
+    el.textContent=message;
+    el.style.color=failed?'#a35d50':'';
+  }
   async function refreshJournalFromApi(){
-    try{
-      const data=await api({action:'journalList'});
-      window.__oreeAtelierRaw=data.atelier||[];
-      renderJournal(data.items||[]);
-      if(typeof window.refreshOreeHome==='function') window.refreshOreeHome();
-      return true;
-    }catch(e){
-      console.warn('Journal API Orée:',e);
-      return false;
-    }
+    if(journalRequest)return journalRequest;
+    journalStatus('◌ Chargement du Journal d’avancement…');
+    journalRequest=(async()=>{
+      try{
+        const data=await api({action:'journalList'});
+        if(!Array.isArray(data?.items))throw new Error('Réponse Journal invalide');
+        // Ne pas remplacer les données de l’Atelier avec une réponse Journal partielle.
+        if(Array.isArray(data.atelier)&&!Array.isArray(window.__oreeAtelierRaw))window.__oreeAtelierRaw=data.atelier;
+        renderJournal(data.items);
+        if(typeof window.refreshOreeHome==='function')window.refreshOreeHome();
+        return true;
+      }catch(e){
+        console.warn('Journal API Orée:',e);
+        journalStatus('⚠ Journal non chargé · Cliquer ici pour réessayer',true);
+        const el=document.getElementById('homeDataStatus');
+        if(el){el.style.cursor='pointer';el.onclick=()=>{el.onclick=null;el.style.cursor='';refreshJournalFromApi()}}
+        return false;
+      }
+    })();
+    try{return await journalRequest}finally{journalRequest=null}
   }
   window.oreeRefreshJournal = refreshJournalFromApi;
 
@@ -1801,9 +1818,9 @@ if(journal)journal.querySelectorAll('.timeline-row').forEach(r=>r.style.display=
         // Tableau de bord en lecture seule : Journal + Atelier d'écriture uniquement.
         const journal=window.oreeRefreshJournal?.();
         const atelier=window.oreeRefreshAtelier?.();
-        await Promise.allSettled([journal,atelier]);
-
-        bootedForUser=session.user.id;
+        const results=await Promise.allSettled([journal,atelier]);
+        const journalOk=results[0].status==='fulfilled'&&results[0].value===true;
+        if(journalOk)bootedForUser=session.user.id;
         window.refreshOreeHome?.();
         return true;
       }catch(e){
@@ -1817,6 +1834,12 @@ if(journal)journal.querySelectorAll('.timeline-row').forEach(r=>r.style.display=
   }
 
   window.oreeLiveBootstrap=liveBootstrap;
+  let lastJournalRetry=0;
+  window.addEventListener('focus',()=>{
+    if(bootedForUser || Date.now()-lastJournalRetry<30000)return;
+    lastJournalRetry=Date.now();
+    liveBootstrap();
+  });
 
   async function start(){
     await liveBootstrap();
