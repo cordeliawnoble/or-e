@@ -1030,9 +1030,13 @@ function renderCards(target,list){
  }).join('');
 }
 function eventHTML(e){return `<div class='event'><span>${e[0]}</span><span class='proj'>${e[1]}</span><span>${e[2]}</span><span class='pill'>${e[3]}</span><span>${e[4]}</span></div>`}
-renderCards(projectCards,projects);
-renderCards(allProjectCards,projects);renderArchives();
-document.getElementById('journalEvents').innerHTML=events.map(eventHTML).join('');
+const homeCards=document.getElementById('projectCards');
+const allCards=document.getElementById('allProjectCards');
+if(homeCards)renderCards(homeCards,projects);
+if(allCards)renderCards(allCards,projects);
+renderArchives();
+const journalEvents=document.getElementById('journalEvents');
+if(journalEvents)journalEvents.innerHTML=events.map(eventHTML).join('');
 document.querySelectorAll('.nav button').forEach(b=>b.onclick=()=>{document.querySelectorAll('.nav button').forEach(x=>x.classList.remove('active'));b.classList.add('active');document.querySelectorAll('.view').forEach(v=>v.classList.remove('active'));document.getElementById(b.dataset.view).classList.add('active')});
 function openProject(name){
  const p=projects.find(x=>x.name===name);
@@ -1408,7 +1412,7 @@ if(journal)journal.querySelectorAll('.timeline-row').forEach(r=>r.style.display=
   const esc=v=>String(v??'').replace(/[&<>\"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
   const MONTHS_FR=['janvier','février','mars','avril','mai','juin','juillet','août','septembre','octobre','novembre','décembre'];
   function currentMonthLabel(){const d=new Date();return MONTHS_FR[d.getMonth()].charAt(0).toUpperCase()+MONTHS_FR[d.getMonth()].slice(1)+' '+d.getFullYear()}
-  function ensureClient(){if(supa)return supa;if(!window.supabase)throw new Error('Supabase indisponible');supa=window.supabase.createClient(OREE_CONFIG.supabaseUrl,OREE_CONFIG.supabaseAnonKey,{auth:{persistSession:true,autoRefreshToken:true,detectSessionInUrl:true}});return supa}
+  function ensureClient(){if(supa)return supa;if(!window.supabase)throw new Error('Supabase indisponible');supa=window.__oreeSharedSupabaseClient||(window.__oreeSharedSupabaseClient=window.supabase.createClient(OREE_CONFIG.supabaseUrl,OREE_CONFIG.supabaseAnonKey,{auth:{persistSession:true,autoRefreshToken:true,detectSessionInUrl:true}}));return supa}
   async function refreshAuthUI(){try{const c=ensureClient();const {data:{session}}=await c.auth.getSession();const btn=document.getElementById('oreeAuthBtn');const login=document.getElementById('oreeAuthLogin');const logout=document.getElementById('oreeAuthLogout');const user=document.getElementById('oreeAuthUser');if(session){btn.textContent='Connectée ✓';btn.classList.add('connected');if(login)login.style.display='none';if(logout)logout.style.display='inline-block';if(user)user.textContent=session.user?.email||'Session Supabase active';}else{btn.textContent='Connexion';btn.classList.remove('connected');if(login)login.style.display='inline-block';if(logout)logout.style.display='none';if(user)user.textContent='';}}catch(e){console.warn(e)}}
   function setAuthModal(open){const m=document.getElementById('oreeAuthModal');if(!m)return;m.classList.toggle('open',open);m.setAttribute('aria-hidden',open?'false':'true');if(open)refreshAuthUI()}
   async function loginOree(){
@@ -1519,8 +1523,8 @@ if(journal)journal.querySelectorAll('.timeline-row').forEach(r=>r.style.display=
 
     grid.querySelectorAll('.mire-add-btn').forEach(b=>b.addEventListener('click',()=>openMireForHorizon(b.dataset.ref)));
     const n=list.length;
-    document.getElementById('horizonSubtitle').textContent=`${n} front${n>1?'s':''} inscrit${n>1?'s':''} dans l’Horizon.`;
-    document.getElementById('horizonQuarter').textContent=period;
+    if(document.getElementById('horizonSubtitle'))document.getElementById('horizonSubtitle').textContent=`${n} front${n>1?'s':''} inscrit${n>1?'s':''} dans l’Horizon.`;
+    if(document.getElementById('horizonQuarter'))document.getElementById('horizonQuarter').textContent=period;
     const src=document.getElementById('horizonSource');
     if(src){src.textContent=live?'● Synchronisé avec « Ligne d’horizon »':'◌ Aperçu local';src.style.color=live?'#55745f':''}
   }
@@ -1956,7 +1960,7 @@ if(journal)journal.querySelectorAll('.timeline-row').forEach(r=>r.style.display=
    if(!window.supabase?.createClient)throw new Error('Supabase ne s’est pas chargé.');
    const c=window.OREE_CONFIG;
    if(!c?.supabaseUrl||!c?.supabaseAnonKey)throw new Error('Configuration Supabase Orée introuvable.');
-   return client=window.supabase.createClient(c.supabaseUrl,c.supabaseAnonKey,{auth:{persistSession:true,autoRefreshToken:true,detectSessionInUrl:true}});
+   return client=window.__oreeSharedSupabaseClient||(window.__oreeSharedSupabaseClient=window.supabase.createClient(c.supabaseUrl,c.supabaseAnonKey,{auth:{persistSession:true,autoRefreshToken:true,detectSessionInUrl:true}}));
  }
  async function login(ev){
    ev?.preventDefault(); ev?.stopImmediatePropagation();
@@ -2007,11 +2011,11 @@ if(journal)journal.querySelectorAll('.timeline-row').forEach(r=>r.style.display=
 
         // Reuse the session persisted by Orée. No Apps Script request without a session.
         const client = window.__oreeBootstrapClient || (window.__oreeBootstrapClient =
-          window.supabase.createClient(
+          window.__oreeSharedSupabaseClient || (window.__oreeSharedSupabaseClient = window.supabase.createClient(
             window.OREE_CONFIG.supabaseUrl,
             window.OREE_CONFIG.supabaseAnonKey,
             {auth:{persistSession:true,autoRefreshToken:true,detectSessionInUrl:true}}
-          )
+          ))
         );
         const {data}=await client.auth.getSession();
         const session=data?.session;
