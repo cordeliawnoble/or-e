@@ -1299,6 +1299,15 @@ function periodParts(label){
   const p=String(label||'').toLowerCase().split(/\s+/);
   return {month:names[p[0]]||0,year:Number(p[1]||0)};
 }
+// Utilitaire global des dates : utilisé aussi par les compteurs de l’accueil.
+// La version locale du module Horizon reste inchangée.
+function normaliseDate(v){
+  if(v instanceof Date)return v.toLocaleDateString('fr-FR');
+  const s=String(v??'');
+  const m=s.match(/^Date\((\d+),(\d+),(\d+)\)$/);
+  if(m)return new Date(+m[1],+m[2],+m[3]).toLocaleDateString('fr-FR');
+  return s;
+}
 function monthJournalRows(label){
   const {month,year}=periodParts(label);
   const rows=window.__oreeJournalRaw||[];
