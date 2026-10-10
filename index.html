@@ -669,6 +669,7 @@ button.primary,.primary-btn,.btn-primary,.oree-mire-btn{background:var(--v11-f)!
 .oree-auth-actions{position:relative!important;z-index:1000000!important;pointer-events:auto!important}
 .oree-auth-card{position:relative!important}
 
+.oree-kpi-stories{background:#fff8ed!important;color:#996329!important}.oree-kpi-stories .label,.oree-kpi-stories small{color:#98672e!important}
 </style>
 <style>
 :root{--forest:#173f37;--paper:#fff9ed;--line:#d8cbb5;--serif:Georgia,"Times New Roman",serif}
@@ -872,7 +873,7 @@ body{background:var(--oree-parchment)!important;background-image:none!important}
 <div class="oree-kpi-row">
 <div class="oree-kpi oree-kpi-writing"><img alt="" class="oree-kpi-art" decoding="async" loading="eager" src="assets/compteur_ecriture.webp"/><div class="label">✍️ Écriture · Atelier</div><strong id="homeWords">0</strong><small id="homeWordsLabel">mots écrits en octobre</small></div>
 <div class="oree-kpi oree-kpi-journal"><img alt="" class="oree-kpi-art" decoding="async" loading="eager" src="assets/compteur_avancees.webp"/><div class="label">🌱 Avancées · Journal</div><strong id="homeJournalCount">0</strong><small id="homeJournalLabel">avancées en octobre</small></div>
-<div class="oree-kpi oree-kpi-com"><img alt="" class="oree-kpi-art" decoding="async" loading="eager" src="assets/compteur_communication.webp"/><div class="label">📣 Communication · Todum</div><strong id="homeComCount">0</strong><small>tâches terminées · Genre = Communication</small></div>
+<div class="oree-kpi oree-kpi-com oree-kpi-stories"><img alt="" class="oree-kpi-art" decoding="async" loading="eager" src="assets/compteur_histoires.svg"/><div class="label">📖 Histoires en cours · Atelier</div><strong id="homeStoriesCount">0</strong><small id="homeStoriesLabel">histoires travaillées ce mois-ci</small></div>
 <div class="oree-kpi oree-kpi-domains"><img alt="" class="oree-kpi-art" decoding="async" loading="eager" src="assets/compteur_domaines.webp"/><div class="label">🧭 Domaines en mouvement</div><strong id="homeDomainCount">0</strong><small>domaines en mouvement ce mois-ci</small></div>
 </div>
 <div id="homeDataStatus" style="font-size:11px;color:#7b786b;margin:7px 2px 14px">Journal : connexion en cours…</div>
@@ -1657,7 +1658,9 @@ if(journal)journal.querySelectorAll('.timeline-row').forEach(r=>r.style.display=
     atelier.forEach(r=>projects.add(String(r.project||r.projectId||'').trim()));
     if($('homeWords')) $('homeWords').textContent=(snap?.words??atelierWords).toLocaleString('fr-FR');
     if($('homeJournalCount')) $('homeJournalCount').textContent=snap?.journal??(rows.length+atelier.length);
-    if($('homeComCount')) $('homeComCount').textContent=snap?.communication??0;
+    const stories=new Set(atelier.map(r=>String(r.project||r.projectId||'').trim()).filter(Boolean));
+    if($('homeStoriesCount')) $('homeStoriesCount').textContent=stories.size.toLocaleString('fr-FR');
+    if($('homeStoriesLabel')) $('homeStoriesLabel').textContent=label==='Cette année'?'histoires travaillées cette année':'histoires travaillées en '+lower;
     if($('homeDomainCount')) $('homeDomainCount').textContent=snap?.domains??projects.size;
     if($('homeWordsLabel')) $('homeWordsLabel').textContent=label==='Cette année'?'mots écrits cette année':'mots écrits en '+lower;
     if($('homeJournalLabel')) $('homeJournalLabel').textContent=label==='Cette année'?'avancées cette année':'avancées en '+lower;
